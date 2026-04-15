@@ -198,12 +198,12 @@ export default function GallaryPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     onClick={() => navigate.push(`/gallery/${slug}`, { state: { id: event.id } })}
-                    className="mt-auto flex justify-center items-left text-asgard font-bold"
+                    className="flex items-center group w-fit mt-auto"
                   >
-                    <span className="px-6 py-3 bg-black text-white hover:text-black rounded-full font-bold hover:bg-white transition-all duration-300">
+                    <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
                       View Details
                     </span>
-                    <span className="px-4 py-3 bg-black text-white hover:text-black rounded-full hover:bg-white transition-all duration-300 flex items-center justify-center">
+                    <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
                       <ArrowRight className="h-5 w-5" />
                     </span>
                   </motion.button>

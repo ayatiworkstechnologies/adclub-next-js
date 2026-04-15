@@ -95,10 +95,10 @@ const priceWithGST = (price = 0) =>
             }
             className="flex items-center group w-fit"
           >
-            <span className="px-4 py-3 text-base bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-white group-hover:text-black transition duration-300">
+            <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
               New / Renew Membership
             </span>
-            <span className="px-4 py-3 bg-primary text-black rounded-full group-hover:bg-white group-hover:text-black transition duration-300 flex items-center justify-center">
+            <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
               <ArrowRight className="h-5 w-5" />
             </span>
           </motion.button>

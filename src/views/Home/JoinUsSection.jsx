@@ -61,12 +61,12 @@ export default function JoinUsSection() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             onClick={() => navigate.push(`/contact`)}
-            className="mt-8 inline-flex font-asgard  items-center"
+            className="flex items-center group w-fit mx-auto mt-8"
           >
-            <span className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold hover:bg-primary dark:hover:bg-primary transition-all duration-300">
+            <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
               JOIN US TODAY
             </span>
-            <span className="px-4 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full hover:bg-primary dark:hover:bg-primary transition-all duration-300 flex items-center justify-center">
+            <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
               <ArrowRight className="h-5 w-5" />
             </span>
           </motion.button>

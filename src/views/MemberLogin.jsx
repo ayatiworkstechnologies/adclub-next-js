@@ -107,12 +107,12 @@ export default function LoginModal({ isOpen, onClose }) {
               whileHover={{ scale: 1.05 }}
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center group disabled:opacity-50"
+              className="flex items-center group w-fit disabled:opacity-50"
             >
-              <span className="px-5 py-3 text-lg bg-black text-white rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
+              <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
                 {isSubmitting ? "Signing In…" : "SIGN IN"}
               </span>
-              <span className="px-4 py-4 bg-black text-white rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+              <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
                 <ArrowRight className="h-5 w-5" />
               </span>
             </motion.button>

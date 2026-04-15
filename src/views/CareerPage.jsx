@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, Building2, Upload } from "lucide-react";
 import Swal from "sweetalert2";
 import { postJobApplication } from "@/api/api";
 import Loader from "@/components/Loader";
@@ -91,19 +91,56 @@ export default function JobApplicationPage() {
     }
   };
 
+  const labelClass =
+    "block font-asgard text-[15px] uppercase tracking-wide text-black sm:text-[16px]";
+  const inputClass =
+    "h-[58px] w-full rounded-[8px] border-0 bg-white px-5 font-glancyr text-[16px] text-black outline-none ring-2 ring-transparent transition placeholder:text-[#8f98a8] focus:ring-black";
+  const textareaClass =
+    "min-h-[150px] w-full resize-none rounded-[8px] border-0 bg-white px-5 py-4 font-glancyr text-[16px] text-black outline-none ring-2 ring-transparent transition placeholder:text-[#8f98a8] focus:ring-black";
+  const selectClass =
+    "h-[58px] w-full rounded-[8px] border-0 bg-white px-5 font-glancyr text-[16px] text-black outline-none ring-2 ring-transparent transition focus:ring-black";
+  const errorTextClass = "mt-2 font-glancyr text-sm text-red-700";
+  const errorInputClass = "ring-2 ring-red-500";
+
   return (
-    <div className="min-h-screen bg-gray-950 mt-20 text-white p-6">
+    <div className="mt-20 min-h-screen bg-black px-4 py-14 text-white sm:px-8 md:px-16">
       {loading && <Loader />}
-      <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+      <div className="mx-auto max-w-6xl">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <p className="mb-3 font-asgard text-[15px] uppercase tracking-wide text-primary">
+            Careers
+          </p>
+          <h1 className="font-asgard text-3xl font-bold uppercase leading-tight md:text-5xl">
+            Connect talent with Chennai's advertising community
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl font-glancyr text-base leading-7 text-white/75">
+            Share openings for creative, media, marketing, strategy, and brand communication roles with The Advertising Club Madras network.
+          </p>
+        </div>
+
+      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.25fr]">
         {/* Job List */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-primary">Latest Jobs</h2>
+        <div className="space-y-6">
+          <div className="rounded-[18px] border border-white/10 bg-white/[0.04] p-6 shadow-xl">
+          <div className="mb-6 flex items-center gap-3">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-black">
+              <BriefcaseBusiness size={24} />
+            </span>
+            <div>
+              <h2 className="font-asgard text-2xl font-bold uppercase text-primary">Latest Jobs</h2>
+              <p className="font-glancyr text-sm text-white/60">Fresh opportunities from member companies</p>
+            </div>
+          </div>
           <ul className="space-y-4">
             {[
               // Example: this array is empty or populated dynamically
             ].length === 0 ? (
-              <li className="text-gray-400 text-sm italic">
-                No job postings yet.
+              <li className="rounded-[14px] border border-dashed border-white/20 bg-black/35 p-6 text-center">
+                <Building2 className="mx-auto mb-3 text-primary" size={32} />
+                <p className="font-asgard text-lg uppercase text-white">No job postings yet.</p>
+                <p className="mt-2 font-glancyr text-sm leading-6 text-white/60">
+                  New career opportunities will appear here once they are published.
+                </p>
               </li>
             ) : (
               [
@@ -111,24 +148,33 @@ export default function JobApplicationPage() {
               ].map((job, index) => (
                 <li
                   key={index}
-                  className="p-4 bg-white/5 border border-white/10 rounded hover:bg-white/10 transition"
+                  className="rounded-[14px] border border-white/10 bg-white/5 p-5 transition hover:bg-white/10"
                 >
-                  <h3 className="text-lg font-semibold">{job.title}</h3>
-                  <p className="text-sm text-gray-400">
+                  <h3 className="font-asgard text-lg font-semibold uppercase">{job.title}</h3>
+                  <p className="mt-2 font-glancyr text-sm text-white/60">
                     {job.location} · {job.type}
                   </p>
                 </li>
               ))
             )}
           </ul>
+          </div>
         </div>
 
         {/* Job Form */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-primary">Post a Job</h2>
+        <div className="rounded-[18px] bg-[#ffd91a] px-6 py-10 text-black shadow-xl sm:px-8 md:px-10">
+          <div className="mb-8 flex items-center gap-3">
+            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white">
+              <ArrowRight size={24} />
+            </span>
+            <div>
+              <h2 className="font-asgard text-2xl font-bold uppercase">Post a Job</h2>
+              <p className="font-glancyr text-sm text-black/60">Fill the role details below</p>
+            </div>
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5"
+            className="space-y-8"
             encType="multipart/form-data"
           >
             {/* Required Fields */}
@@ -171,26 +217,26 @@ export default function JobApplicationPage() {
                 placeholder: "TechCorp Pvt Ltd",
               },
             ].map(({ name, label, type, placeholder }) => (
-              <div key={name}>
-                <label className="block mb-1">{label}</label>
+              <div key={name} className="space-y-2">
+                <label className={labelClass}>{label}</label>
                 <input
                   {...register(name)}
                   type={type}
                   placeholder={placeholder}
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 text-white rounded"
+                  className={`${inputClass} ${errors[name] ? errorInputClass : ""}`}
                 />
                 {errors[name] && (
-                  <p className="text-red-500 text-sm">{errors[name].message}</p>
+                  <p className={errorTextClass}>{errors[name].message}</p>
                 )}
               </div>
             ))}
 
             {/* Job Type */}
-            <div>
-              <label className="block mb-1 text-white">Job Type *</label>
+            <div className="space-y-2">
+              <label className={labelClass}>Job Type *</label>
               <select
                 {...register("job_type")}
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                className={`${selectClass} ${errors.job_type ? errorInputClass : ""}`}
               >
                 <option value="">-- Select --</option>
                 <option value="Full Time">Full Time</option>
@@ -198,23 +244,23 @@ export default function JobApplicationPage() {
                 <option value="Internship">Internship</option>
               </select>
               {errors.job_type && (
-                <p className="text-red-500 text-sm">
+                <p className={errorTextClass}>
                   {errors.job_type.message}
                 </p>
               )}
             </div>
 
             {/* Description */}
-            <div>
-              <label className="block mb-1">Description *</label>
+            <div className="space-y-2">
+              <label className={labelClass}>Description *</label>
               <textarea
                 {...register("description")}
                 rows={4}
                 placeholder="Describe the role"
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 text-white rounded"
+                className={`${textareaClass} ${errors.description ? errorInputClass : ""}`}
               ></textarea>
               {errors.description && (
-                <p className="text-red-500 text-sm">
+                <p className={errorTextClass}>
                   {errors.description.message}
                 </p>
               )}
@@ -247,26 +293,36 @@ export default function JobApplicationPage() {
                 placeholder: "@companyjobs",
               },
             ].map(({ name, label, type, placeholder }) => (
-              <div key={name}>
-                <label className="block mb-1">{label}</label>
+              <div key={name} className="space-y-2">
+                <label className={labelClass}>{label}</label>
                 <input
                   {...register(name)}
                   type={type}
                   placeholder={placeholder}
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 text-white rounded"
+                  className={`${inputClass} ${errors[name] ? errorInputClass : ""}`}
                 />
                 {errors[name] && (
-                  <p className="text-red-500 text-sm">{errors[name].message}</p>
+                  <p className={errorTextClass}>{errors[name].message}</p>
                 )}
               </div>
             ))}
 
             {/* Logo Upload */}
-            <div>
-              <label className="block mb-1">Company Logo *</label>
-              <input type="file" accept="image/*" {...register("logo")} />
+            <div className="space-y-2">
+              <label className={labelClass}>Company Logo *</label>
+              <label
+                className={`flex min-h-[76px] cursor-pointer items-center justify-between gap-4 rounded-[8px] bg-white px-5 font-glancyr text-black ring-2 ring-transparent transition hover:ring-black ${
+                  errors.logo ? errorInputClass : ""
+                }`}
+              >
+                <span className="text-[#8f98a8]">Upload company logo</span>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white">
+                  <Upload size={20} />
+                </span>
+                <input className="sr-only" type="file" accept="image/*" {...register("logo")} />
+              </label>
               {errors.logo && (
-                <p className="text-red-500 text-sm">{errors.logo.message}</p>
+                <p className={errorTextClass}>{errors.logo.message}</p>
               )}
             </div>
 
@@ -274,18 +330,19 @@ export default function JobApplicationPage() {
 
             <motion.button
               whileHover={{ scale: 1.05 }}
-              className="mt-4 inline-flex font-asgard items-center"
+              className="flex items-center group w-fit"
               type="submit"
             >
-              <span className="px-6 py-3 bg-primary text-black hover:text-black rounded-full font-bold hover:bg-white transition-all duration-300">
-                {loading ? "Submitting..." : "Submit Job"}{" "}
+              <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
+                {loading ? "Submitting..." : "Submit Job"}
               </span>
-              <span className="px-4 py-4 bg-primary text-black hover:text-black rounded-full hover:bg-white transition-all duration-300 flex items-center justify-center">
+              <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
                 <ArrowRight className="h-5 w-5" />
               </span>
             </motion.button>
           </form>
         </div>
+      </div>
       </div>
     </div>
   );

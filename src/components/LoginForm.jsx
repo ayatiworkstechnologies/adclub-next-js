@@ -161,99 +161,124 @@ const onSubmit = async (data) => {
   }
 };
 
+  const panelTitle =
+    mode === "login" ? "Login" : mode === "register" ? "Register" : "Forgot Password";
+  const fieldWrapClass = "space-y-2";
+  const labelClass =
+    "block font-asgard text-[18px] sm:text-[20px] uppercase tracking-wide text-black";
+  const inputClass =
+    "w-full h-[60px] rounded-[8px] border-0 bg-white px-6 text-[16px] font-glancyr text-black placeholder:text-[#8f98a8] outline-none ring-2 ring-transparent transition focus:ring-black";
+  const errorInputClass = "ring-2 ring-red-500";
+  const errorTextClass = "mt-2 text-sm font-glancyr text-red-700";
+  const iconButtonClass =
+    "absolute right-5 top-[48px] flex h-6 w-6 items-center justify-center text-black transition hover:opacity-70";
 
   return (
-    <section className="bg-black text-white py-20 px-4 sm:px-8 md:px-20">
-      <div className="py-20">
-        <h2 className="text-3xl md:text-4xl font-bold font-asgard text-center mb-14 uppercase tracking-wide">
-          {mode === "login" ? "Login" : mode === "register" ? "Register" : "Forgot Password"}
+    <section className="bg-black px-4 py-16 text-white sm:px-8 md:px-20">
+      <div className="mx-auto max-w-[920px] py-8 sm:py-14">
+        <h2 className="mb-10 text-center font-asgard text-3xl font-bold uppercase tracking-wide md:text-4xl">
+          {panelTitle}
         </h2>
 
-        <div className="max-w-xl mx-auto">
+        <div className="mx-auto max-w-[720px]">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-yellow-400 p-10 rounded-2xl shadow-xl text-black"
+            className="rounded-[18px] bg-[#ffd91a] px-6 py-10 text-black shadow-xl sm:px-12 md:px-[50px] md:py-[55px]"
           >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               {mode === "register" && (
-                <div>
-                  <label className="font-asgard uppercase">Full Name</label>
+                <div className={fieldWrapClass}>
+                  <label className={labelClass}>Full Name</label>
                   <input
                     type="text"
                     {...register("name")}
                     placeholder="Enter your name"
-                    className={`w-full px-5 py-3 rounded-lg ${errors.name ? "border-red-500 ring-red-500" : "focus:ring-black"}`}
+                    className={`${inputClass} ${errors.name ? errorInputClass : ""}`}
                   />
-                  {errors.name && <p className="text-red-600 text-sm">{errors.name.message}</p>}
+                  {errors.name && <p className={errorTextClass}>{errors.name.message}</p>}
                 </div>
               )}
 
-              <div>
-                <label className="font-asgard uppercase">Email</label>
+              <div className={fieldWrapClass}>
+                <label className={labelClass}>Email</label>
                 <input
                   type="email"
                   {...register("email")}
                   placeholder="Enter your email"
-                  className={`w-full px-5 py-3 rounded-lg ${errors.email ? "border-red-500 ring-red-500" : "focus:ring-black"}`}
+                  className={`${inputClass} ${errors.email ? errorInputClass : ""}`}
                 />
-                {errors.email && <p className="text-red-600 text-sm">{errors.email.message}</p>}
+                {errors.email && <p className={errorTextClass}>{errors.email.message}</p>}
               </div>
 
               {(mode === "login" || mode === "register") && (
-                <div className="relative">
-                  <label className="font-asgard uppercase">Password</label>
+                <div className={`relative ${fieldWrapClass}`}>
+                  <label className={labelClass}>Password</label>
                   <input
                     type={showPassword ? "text" : "password"}
                     {...register("password")}
                     placeholder="Enter password"
-                    className={`w-full px-5 py-3 pr-12 rounded-lg ${errors.password ? "border-red-500 ring-red-500" : "focus:ring-black"}`}
+                    className={`${inputClass} pr-14 ${errors.password ? errorInputClass : ""}`}
                   />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-[38px]">
-                    {showPassword ? <EyeOff /> : <Eye />}
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={iconButtonClass}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff size={25} strokeWidth={2.4} /> : <Eye size={25} strokeWidth={2.4} />}
                   </button>
-                  {errors.password && <p className="text-red-600 text-sm">{errors.password.message}</p>}
+                  {errors.password && <p className={errorTextClass}>{errors.password.message}</p>}
                 </div>
               )}
 
               {mode === "register" && (
-                <div className="relative">
-                  <label className="font-asgard uppercase">Confirm Password</label>
+                <div className={`relative ${fieldWrapClass}`}>
+                  <label className={labelClass}>Confirm Password</label>
                   <input
                     type={showConfirm ? "text" : "password"}
                     {...register("confirmPassword")}
                     placeholder="Confirm password"
-                    className={`w-full px-5 py-3 pr-12 rounded-lg ${errors.confirmPassword ? "border-red-500 ring-red-500" : "focus:ring-black"}`}
+                    className={`${inputClass} pr-14 ${errors.confirmPassword ? errorInputClass : ""}`}
                   />
-                  <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute right-3 top-[38px]">
-                    {showConfirm ? <EyeOff /> : <Eye />}
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirm(!showConfirm)}
+                    className={iconButtonClass}
+                    aria-label={showConfirm ? "Hide confirm password" : "Show confirm password"}
+                  >
+                    {showConfirm ? <EyeOff size={25} strokeWidth={2.4} /> : <Eye size={25} strokeWidth={2.4} />}
                   </button>
-                  {errors.confirmPassword && <p className="text-red-600 text-sm">{errors.confirmPassword.message}</p>}
+                  {errors.confirmPassword && <p className={errorTextClass}>{errors.confirmPassword.message}</p>}
                 </div>
               )}
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 type="submit"
-                className="w-full bg-black text-white py-3 rounded-full font-asgard hover:bg-white hover:text-black transition-all flex justify-center items-center gap-2"
+                className="flex items-center group w-fit"
               >
-                {mode === "register" ? "CREATE ACCOUNT" : mode === "forgot" ? "SEND RESET LINK" : "LOGIN"}
-                <ArrowRight />
+                <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
+                  {mode === "register" ? "CREATE ACCOUNT" : mode === "forgot" ? "SEND RESET LINK" : "LOGIN"}
+                </span>
+                <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+                  <ArrowRight className="h-5 w-5" />
+                </span>
               </motion.button>
             </form>
 
-            <div className="text-sm text-center font-glancyr text-black mt-8 space-y-2">
+            <div className="mt-10 space-y-6 text-center font-glancyr text-[16px] font-semibold text-black sm:text-[17px]">
               {mode !== "forgot" && (
-                <button className="hover:underline" onClick={() => setMode("forgot")}>
+                <button className="transition hover:underline" onClick={() => setMode("forgot")}>
                   Forgot your password?
                 </button>
               )}
-              <div className="my-4 border-t border-black" />
+              {mode !== "forgot" && <div className="mx-auto h-px w-full max-w-[620px] bg-black" />}
               {mode === "login" && (
                 <p>
                   Don’t have an account?{" "}
-                  <button className="text-blue-700 hover:underline" onClick={() => setMode("register")}>
+                  <button className="font-semibold text-[#0047ff] transition hover:underline" onClick={() => setMode("register")}>
                     Register here
                   </button>
                 </p>
@@ -261,7 +286,7 @@ const onSubmit = async (data) => {
               {mode === "register" && (
                 <p>
                   Already have an account?{" "}
-                  <button className="text-blue-700 hover:underline" onClick={() => setMode("login")}>
+                  <button className="font-semibold text-[#0047ff] transition hover:underline" onClick={() => setMode("login")}>
                     Login here
                   </button>
                 </p>
@@ -269,7 +294,7 @@ const onSubmit = async (data) => {
               {mode === "forgot" && (
                 <p>
                   Remembered your password?{" "}
-                  <button className="text-blue-700 hover:underline" onClick={() => setMode("login")}>
+                  <button className="font-semibold text-[#0047ff] transition hover:underline" onClick={() => setMode("login")}>
                     Back to Login
                   </button>
                 </p>

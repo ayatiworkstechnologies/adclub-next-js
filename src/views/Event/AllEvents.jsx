@@ -150,13 +150,13 @@ export default function AllEvents() {
 
                   <motion.button
                     whileHover={{ scale: 1.05 }}
-                    className="mt-6 inline-flex items-center font-asgard"
+                    className="flex items-center group w-fit mt-6"
                   >
-                    <span className="px-5 py-3 bg-white text-black rounded-full font-bold hover:bg-primary hover:text-black transition-colors duration-300">
+                    <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
                       Register Now
                     </span>
-                    <span className="px-4 py-3 bg-white text-black rounded-full hover:bg-primary hover:text-black transition-colors duration-300 flex items-center">
-                      <ArrowRight className="w-5 h-5" />
+                    <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+                      <ArrowRight className="h-5 w-5" />
                     </span>
                   </motion.button>
                 </div>

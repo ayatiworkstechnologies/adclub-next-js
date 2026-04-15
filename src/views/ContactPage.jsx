@@ -52,24 +52,33 @@ export default function ContactSection() {
     }
   };
 
+  const labelClass =
+    "block font-asgard text-[16px] uppercase tracking-wide text-black sm:text-[18px]";
+  const inputClass =
+    "h-[60px] w-full rounded-[8px] border-0 bg-white px-6 font-glancyr text-[16px] text-black outline-none ring-2 ring-transparent transition placeholder:text-[#8f98a8] focus:ring-black";
+  const textareaClass =
+    "min-h-[140px] w-full resize-none rounded-[8px] border-0 bg-white px-6 py-4 font-glancyr text-[16px] text-black outline-none ring-2 ring-transparent transition placeholder:text-[#8f98a8] focus:ring-black";
+  const errorTextClass = "mt-2 font-glancyr text-sm text-red-700";
+  const errorInputClass = "ring-2 ring-red-500";
+
   return (
-    <section className="bg-black text-white mt-10 py-16 px-4 sm:px-8 md:px-16">
-      <h2 className="text-2xl md:text-3xl font-bold font-asgard text-center mb-10 uppercase">
+    <section className="mt-10 bg-black px-4 py-16 text-white sm:px-8 md:px-16">
+      <h2 className="mb-10 text-center font-asgard text-2xl font-bold uppercase md:text-3xl">
         Contact Us
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-10 items-start">
+      <div className="grid items-start gap-10 md:grid-cols-2">
         {/* Contact Form */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-primary p-6 sm:p-8 rounded-xl shadow-md text-black w-full"
+          className="w-full rounded-[18px] bg-[#ffd91a] px-6 py-10 text-black shadow-xl sm:px-8 md:px-10"
         >
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-asgard uppercase font-bold mb-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div className="space-y-2">
+                <label className={labelClass}>
                   Full Name
                 </label>
                 <input
@@ -78,27 +87,27 @@ export default function ContactSection() {
                   })}
                   type="text"
                   placeholder="Enter your name"
-                  className="w-full border border-white font-glancyr rounded-md px-4 py-2 placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+                  className={`${inputClass} ${errors.fullName ? errorInputClass : ""}`}
                 />
                 {errors.fullName && (
-                  <p className="text-white text-sm mt-1">
+                  <p className={errorTextClass}>
                     {errors.fullName.message}
                   </p>
                 )}
               </div>
-              <div>
-                <label className="block text-sm font-asgard uppercase font-bold mb-2">
+              <div className="space-y-2">
+                <label className={labelClass}>
                   Company Name
                 </label>
                 <input
                   {...register("companyName")}
                   type="text"
                   placeholder="Enter your company"
-                  className="w-full border border-white font-glancyr rounded-md px-4 py-2 placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+                  className={inputClass}
                 />
               </div>
-              <div>
-                <label className="block text-sm font-asgard uppercase font-bold mb-2">
+              <div className="space-y-2">
+                <label className={labelClass}>
                   Email ID
                 </label>
                 <input
@@ -111,16 +120,16 @@ export default function ContactSection() {
                   })}
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full border border-white font-glancyr rounded-md px-4 py-2 placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+                  className={`${inputClass} ${errors.email ? errorInputClass : ""}`}
                 />
                 {errors.email && (
-                  <p className="text-white text-sm mt-1">
+                  <p className={errorTextClass}>
                     {errors.email.message}
                   </p>
                 )}
               </div>
-              <div>
-                <label className="block text-sm font-asgard uppercase font-bold mb-2">
+              <div className="space-y-2">
+                <label className={labelClass}>
                   Contact Number
                 </label>
                 <input
@@ -133,27 +142,27 @@ export default function ContactSection() {
                   })}
                   type="text"
                   placeholder="Enter your contact"
-                  className="w-full border border-white font-glancyr rounded-md px-4 py-2 placeholder-gray focus:outline-none focus:ring-2 focus:ring-black"
+                  className={`${inputClass} ${errors.contact ? errorInputClass : ""}`}
                 />
                 {errors.contact && (
-                  <p className="text-white text-sm mt-1">
+                  <p className={errorTextClass}>
                     {errors.contact.message}
                   </p>
                 )}
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-asgard uppercase font-bold mb-2">
+            <div className="space-y-2">
+              <label className={labelClass}>
                 Message
               </label>
               <textarea
                 {...register("message", { required: "Message is required" })}
                 placeholder="Enter your message"
-                className="w-full border border-white font-glancyr rounded-md px-4 py-2 h-28 placeholder-gray resize-none focus:outline-none focus:ring-2 focus:ring-black"
+                className={`${textareaClass} ${errors.message ? errorInputClass : ""}`}
               ></textarea>
               {errors.message && (
-                <p className="text-white text-sm mt-1">
+                <p className={errorTextClass}>
                   {errors.message.message}
                 </p>
               )}
@@ -161,13 +170,13 @@ export default function ContactSection() {
 
             <motion.button
               whileHover={{ scale: 1.05 }}
-              className="mt-4 inline-flex font-asgard items-center"
+              className="flex items-center group w-fit"
               type="submit"
             >
-              <span className="px-6 py-3 bg-black text-white hover:text-black rounded-full font-bold hover:bg-white transition-all duration-300">
+              <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
                 SUBMIT
               </span>
-              <span className="px-4 py-4 bg-black text-white hover:text-black rounded-full hover:bg-white transition-all duration-300 flex items-center justify-center">
+              <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
                 <ArrowRight className="h-5 w-5" />
               </span>
             </motion.button>

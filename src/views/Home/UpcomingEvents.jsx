@@ -139,17 +139,13 @@ export default function UpcomingEvents() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             onClick={() => navigate.push(`/events`)}
-            className="mt-8 inline-flex font-asgard items-center group w-fit"
+            className="flex items-center group w-fit mx-auto mt-8"
           >
-            <span
-              className="px-6 py-3 group-hover:bg-primary text-sm sm:text-base md:text-lg lg:text-xl  bg-black dark:bg-white text-white dark:text-black 
-                        rounded-full font-bold group w-fit hover:bg-primary dark:hover:bg-primary transition-all duration-300"   >
+            <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
               VIEW ALL EVENTS
             </span>
-            <span
-              className="px-4 py-3 group-hover:bg-primary bg-black dark:bg-white text-white dark:text-black rounded-full hover:bg-primary  dark:hover:bg-primary 
-                transition-all duration-300 flex items-center justify-center">
-              <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6" />
+            <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+              <ArrowRight className="h-5 w-5" />
             </span>
           </motion.button>
         </div>

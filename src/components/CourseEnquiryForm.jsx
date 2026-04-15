@@ -239,18 +239,19 @@ export default function CourseEnquiryForm({ setCursorHover }) {
             </div>
 
             <motion.button
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 onMouseEnter={() => setCursorHover && setCursorHover(true)}
                 onMouseLeave={() => setCursorHover && setCursorHover(false)}
-                className="w-full relative overflow-hidden rounded-xl font-asgard uppercase font-bold text-black bg-primary py-5 px-8 mt-4 group"
+                className="flex items-center group w-fit mt-4"
             >
-                <span className="relative z-10 flex items-center justify-center gap-3">
-                    Submit Application{" "}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
+                    Submit Application
                 </span>
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
+                <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+                    <ArrowRight className="h-5 w-5" />
+                </span>
             </motion.button>
         </form>
     );
