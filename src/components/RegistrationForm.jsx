@@ -35,7 +35,7 @@ export default function RegistrationForm() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-yellow-400 p-10 rounded-2xl shadow-xl text-black"
+            className="bg-primary p-10 rounded-2xl shadow-xl text-black"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <div>

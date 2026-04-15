@@ -61,7 +61,7 @@ export default function LoginModal({ isOpen, onClose }) {
               className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 ${
                 errors.email
                   ? "border-red-500 ring-red-400"
-                  : "border-gray-300 focus:ring-yellow-400"
+                  : "border-gray-300 focus:ring-primary"
               }`}
             />
             {errors.email && (
@@ -81,7 +81,7 @@ export default function LoginModal({ isOpen, onClose }) {
               className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 ${
                 errors.password
                   ? "border-red-500 ring-red-400"
-                  : "border-gray-300 focus:ring-yellow-400"
+                  : "border-gray-300 focus:ring-primary"
               }`}
             />
             {errors.password && (

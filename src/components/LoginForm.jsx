@@ -185,7 +185,7 @@ const onSubmit = async (data) => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="rounded-[18px] bg-[#ffd91a] px-6 py-10 text-black shadow-xl sm:px-12 md:px-[50px] md:py-[55px]"
+            className="rounded-[18px] bg-primary px-6 py-10 text-black shadow-xl sm:px-12 md:px-[50px] md:py-[55px]"
           >
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
               {mode === "register" && (

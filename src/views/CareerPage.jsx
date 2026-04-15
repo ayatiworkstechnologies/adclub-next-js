@@ -162,7 +162,7 @@ export default function JobApplicationPage() {
         </div>
 
         {/* Job Form */}
-        <div className="rounded-[18px] bg-[#ffd91a] px-6 py-10 text-black shadow-xl sm:px-8 md:px-10">
+        <div className="rounded-[18px] bg-primary px-6 py-10 text-black shadow-xl sm:px-8 md:px-10">
           <div className="mb-8 flex items-center gap-3">
             <span className="flex h-12 w-12 items-center justify-center rounded-full bg-black text-white">
               <ArrowRight size={24} />

@@ -50,10 +50,10 @@ export default function JoinUsSection() {
             whileHover={{ scale: 1.05 }}
             className="mt-8 inline-flex font-asgard items-center"
           >
-            <span className="px-6 py-3  bg-primary text-black uppercase rounded-full font-bold hover:bg-yellow-300 transition-all duration-300">
+            <span className="px-6 py-3  bg-primary text-black uppercase rounded-full font-bold hover:bg-primary transition-all duration-300">
               Join US Today
             </span>
-            <span className="px-4 py-3 bg-primary text-black rounded-full hover:bg-yellow-300 transition-all duration-300 flex items-center justify-center">
+            <span className="px-4 py-3 bg-primary text-black rounded-full hover:bg-primary transition-all duration-300 flex items-center justify-center">
               <ArrowRight className="h-5 w-5" />
             </span>
           </motion.button> */}

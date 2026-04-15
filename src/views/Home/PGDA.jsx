@@ -16,7 +16,7 @@ export default function PGDACourseCard() {
     <section className="bg-black text-white py-16 px-4 flex flex-col items-center justify-center text-center overflow-hidden relative">
       {/* Yellow Skewed Banner */}
       <div className="relative mb-8">
-        <div className="bg-yellow-400 px-6 py-4 transform -skew-y-3 inline-block">
+        <div className="bg-primary px-6 py-4 transform -skew-y-3 inline-block">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-asgard font-extrabold uppercase text-black">
             COURSE OFFERED <br /> (PGDA)
           </h2>

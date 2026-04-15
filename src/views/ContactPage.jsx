@@ -73,7 +73,7 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full rounded-[18px] bg-[#ffd91a] px-6 py-10 text-black shadow-xl sm:px-8 md:px-10"
+          className="w-full rounded-[18px] bg-primary px-6 py-10 text-black shadow-xl sm:px-8 md:px-10"
         >
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

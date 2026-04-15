@@ -78,7 +78,7 @@ export default function LatestNews() {
                   {/* Tag Button */}
                   <button
                     type="button"
-                    className="text-[12px] uppercase border border-black hover:border-primary dark:border-white px-3 py-2 rounded-full inline-block mb-2 transition-colors duration-300 hover:bg-primary dark:hover:bg-yellow-300 hover:text-black"
+                    className="text-[12px] uppercase border border-black hover:border-primary dark:border-white px-3 py-2 rounded-full inline-block mb-2 transition-colors duration-300 hover:bg-primary dark:hover:bg-primary hover:text-black"
                   >
                     {item.category || item.tag}
                   </button>

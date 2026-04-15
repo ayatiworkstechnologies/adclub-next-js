@@ -7,7 +7,7 @@ export default {
       colors: {
         primary: "#FFB700",     
         secondary: "#64748b",   
-        accent: "#f59e0b",      
+        accent: "#FFB700",      
         muted: "#f3f4f6",      
         danger: "#ef4444",     
         success: "#10b981",   

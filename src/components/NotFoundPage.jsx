@@ -29,7 +29,7 @@ const NotFoundPage = () => {
       {/* Button */}
       <button
         onClick={() => navigate.push("/")}
-        className="mt-6 px-6 py-3 rounded-xl bg-primary text-black font-semibold hover:bg-yellow-300 transition"
+        className="mt-6 px-6 py-3 rounded-xl bg-primary text-black font-semibold hover:bg-primary transition"
       >
         Go Back Home
       </button>
