@@ -1,6 +1,9 @@
 import AnimatedBackground from "@/components/background";
 import HeroSection from "@/pages/Home/HeroSection";
 import LegacySection from "@/pages/Home/LegacySection";
+import AdvertisingDNA from "@/pages/Home/AdvertisingDNA";
+import CareerDrivenEducation from "@/pages/Home/CareerDrivenEducation";
+import WhyAdClubMadras from "@/pages/Home/WhyAdClubMadras";
 import CommunityBanner from "@/pages/Home/CommunityBanner";
 import WhyJoinUsBanner from "@/pages/Home/WhyJoinUsBanner";
 import EventSection from "@/pages/Home/EventSection";
@@ -24,8 +27,11 @@ export default function HomePage() {
       <AnimatedBackground />
       <HeroSection />
       <LegacySection />
-      <CommunityBanner />
-      <PgdaCard />
+      <AdvertisingDNA />
+      <CareerDrivenEducation />
+      <WhyAdClubMadras />
+      {/* <CommunityBanner /> */}
+      {/* <PgdaCard /> */}
       <WhyJoinUsBanner />
       <EventSection />
       <UpcomingEvents />

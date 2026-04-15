@@ -12,6 +12,15 @@ export default function EventDetailPage() {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      navigate.back();
+      return;
+    }
+
+    navigate.push("/events");
+  };
+
   // ✅ Correct seconds-to-time converter (seconds since midnight)
   const formatTime = (seconds) => {
     if (!seconds || isNaN(seconds)) return "Not Available";
@@ -76,7 +85,7 @@ export default function EventDetailPage() {
         {/* 🔙 Back Button */}
         <div className="mb-6">
           <button
-            onClick={() => navigate.push(-1)}
+            onClick={handleBack}
             className="flex items-center gap-2 px-4 py-2 border font-primary border-primary bg-primary/10 text-sm text-gray-300 rounded-full transition-all duration-200 hover:bg-primary hover:text-white active:scale-95"
           >
             <ArrowLeft className="w-4 h-4" />

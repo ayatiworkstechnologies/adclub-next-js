@@ -19,6 +19,15 @@ export default function GallaryDetailPage() {
   const [loading, setLoading] = useState(true);
   const [previewIndex, setPreviewIndex] = useState(null);
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      navigate.back();
+      return;
+    }
+
+    navigate.push("/gallery");
+  };
+
   // Load gallery data fast
   useEffect(() => {
     const fetchData = async () => {
@@ -121,7 +130,7 @@ export default function GallaryDetailPage() {
       {/* 🔙 Back Button */}
       <div className="mb-6">
         <button
-          onClick={() => navigate.push(-1)}
+          onClick={handleBack}
           className="flex items-center gap-2 px-4 py-2 border border-primary bg-primary/10 text-sm text-gray-300 rounded-full transition-all duration-200 hover:bg-primary hover:text-white active:scale-95"
         >
           <ArrowLeft className="w-4 h-4" />
