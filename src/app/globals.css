@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+/* Optional global font or theme defaults */
+body {
+  @apply bg-brand-light text-brand-textLight font-sans transition-colors duration-300;
+}
+.dark body {
+  @apply bg-brand-dark text-brand-textDark;
+}
+/* tailwind.css or global.css */
+/* global.css or in Tailwind @apply */
+.form-input {
+  @apply w-full px-4 py-2 text-sm rounded-md outline-none border border-gray-300 
+          focus:ring-2 focus:ring-black placeholder-primary text-black;
+}
+  
+
+/* In your global CSS or Tailwind file */
+.nav-chevron-btn {
+  @apply text-white w-12 h-12 flex items-center justify-center rounded-full border border-primary bg-primary disabled:opacity-30;
+}
+
+.chevron-icon {
+  @apply w-5 h-5 text-black;
+}
+
+
+/* @font-face {
+  font-family: 'Asgard Trial';
+  src: url('/src/assets/fonts/AsgardTrial-Regular.ttf') format('woff2');
+  font-weight: 'normal';
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'Asgard Trial';
+  src: url('/fonts/AsgardTrial-WideBold.ttf') format('truetype');
+  font-weight: 'normal';
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Glancyr';
+  src: url('/fonts/glancyr-glancyr-regular-400.otf') format('truetype');
+  font-weight: 'normal';
+  font-style: normal;
+}
+
+/* src/assets/fonts/fonts.css */
+@font-face {
+  font-family: 'GlancyrBold';
+  src: url('/fonts/glancyr-glancyr-bold-700.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Brutalism';
+  src: url('/fonts/y2k-brutalism-font.otf') format('truetype');
+  font-weight: 'normal';
+  font-style: normal;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@keyframes carousel3D {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-360deg);
+  }
+}
+
+.animate-carousel3D {
+  animation: carousel3D 40s linear infinite;
+  transform-style: preserve-3d;
+}
+
+.marquee-container {
+  display: flex;
+  width: 200%;
+  animation: scrollMarquee 40s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  flex-wrap: nowrap;
+  animation: scrollMarquee 40s linear infinite;
+}
+
+.marquee-container:hover,
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+.hex-clip {
+  clip-path: polygon(
+    25% 0%, 
+    75% 0%, 
+    100% 50%, 
+    75% 100%, 
+    25% 100%, 
+    0% 50%
+  );
+}
+
+.hex-clip {
+  clip-path: polygon(
+    25% 0%, 
+    75% 0%, 
+    100% 50%, 
+    75% 100%, 
+    25% 100%, 
+    0% 50%
+  );
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee {
+  display: inline-flex;
+  min-width: 100%;
+  animation: marquee 60s linear infinite;
+}
