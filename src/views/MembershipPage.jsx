@@ -205,11 +205,11 @@ export default function MembershipPage() {
             </h3>
             <ul className="list-disc pl-6 space-y-2 text-sm sm:text-base text-gray-300">
               <li>
-                Corporate Membership: ₹5,000 + 18% GST = ₹5,900
+                Corporate Membership: ₹6,000 + 18% GST = ₹7,080
               </li>
 
               <li>
-                Individual Membership: ₹2,000 + 18% GST = ₹2,360
+                Individual Membership: ₹2,500 + 18% GST = ₹2,950
               </li>
 
               <li>

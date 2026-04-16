@@ -24,7 +24,6 @@ import { getUserDetails } from "@/api/api";
 export default function Navbar() {
   const { darkMode } = useTheme();
   const pathname = usePathname();
-  const location = { pathname };
   const [user, setUser] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,14 +37,24 @@ export default function Navbar() {
 
   // Check login status
   useEffect(() => {
-    const auth = typeof window !== "undefined" ? localStorage.getItem("isAuthenticated") : null === "true";
-    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user") || "{ }") : null;
-    if (auth && storedUser) {
-      setUser(storedUser);
-    } else {
+    if (typeof window === "undefined") return;
+
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+    const storedRaw = localStorage.getItem("user");
+
+    if (!isAuthenticated || !storedRaw) {
+      setUser(null);
+      return;
+    }
+
+    try {
+      const parsedUser = JSON.parse(storedRaw);
+      setUser(parsedUser || null);
+    } catch (error) {
+      console.error("Invalid user JSON in localStorage:", error);
       setUser(null);
     }
-  }, [location]);
+  }, [pathname]);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
