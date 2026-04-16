@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
-import { getExecutiveCommittee } from "@/api/api"; // Adjust path to match your project
+import { getExecutiveCommittee } from "@/api/api";
 import Loader from "@/components/Loader";
 
 const ExecutiveCommittee = () => {
@@ -54,13 +54,11 @@ const ExecutiveCommittee = () => {
       </h3>
 
       <div className="flex flex-col md:flex-row gap-10">
-        {/* Sidebar Year Navigation */}
         <div className="md:w-1/6 w-full flex flex-col items-center relative">
           <button
             onClick={scrollUp}
             disabled={startIndex === 0}
-            className={`mb-4 w-10 h-10 flex items-center justify-center rounded-full ${startIndex === 0 ? "opacity-30 cursor-not-allowed" : "text-primary hover:text-white"
-              }`}
+            className={`mb-4 w-10 h-10 flex items-center justify-center rounded-full ${startIndex === 0 ? "opacity-30 cursor-not-allowed" : "text-primary hover:text-white"}`}
           >
             ▲
           </button>
@@ -74,7 +72,7 @@ const ExecutiveCommittee = () => {
               >
                 <p
                   className={`py-1 rounded transition ${selectedCommittee?.id === item.id
-                      ? "text-primary bg-primary bg-opacity-10 font-bold"
+                      ? "text-white bg-primary bg-opacity-10 font-bold"
                       : "text-white text-sm"
                     }`}
                 >
@@ -96,7 +94,6 @@ const ExecutiveCommittee = () => {
           </button>
         </div>
 
-        {/* Main Description */}
         <div className="md:w-5/6 bg-primary text-black p-6 rounded shadow-md overflow-x-auto">
           <div
             className="prose max-w-none prose-sm sm:prose-base prose-h4:font-bold prose-table:border border-black"

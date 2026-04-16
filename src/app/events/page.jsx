@@ -1,4 +1,4 @@
-import PageComponent from "@/pages/Eventpages";
+import PageComponent from "@/pages/EventpagesLegacy";
 import { createPageMetadata } from "../seo";
 
 export const metadata = createPageMetadata({

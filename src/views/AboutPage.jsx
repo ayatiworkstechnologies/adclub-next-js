@@ -8,6 +8,7 @@ import AboutTimeLine from "@/pages/About/AboutTimeLine";
 import TimelineComponent from "@/pages/About/ExecutiveTimeline";
 import PastPresidentsGrid from "@/pages/About/PastPresidentsGrid";
 import FacilitiesSection from "@/pages/About/FacilitiesSection";
+import LegendaryJourney from "@/pages/About/LegendaryJourney";
 import { motion, AnimatePresence } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
@@ -16,6 +17,7 @@ const tabs = [
   { id: "past", label: "Past Presidents" },
   { id: "executive", label: "Executive Committee" },
   { id: "facilities", label: "Our Facilities" },
+  { id: "journey", label: "Legendary Journey" },
 ];
 
 const fadeVariants = {
@@ -136,6 +138,21 @@ export default function AboutPage() {
                   Our Facilities
                 </h2>
                 <FacilitiesSection />
+              </motion.div>
+            )}
+
+            {activeTab === "journey" && (
+              <motion.div
+                key="journey"
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={fadeVariants}
+              >
+                <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
+                  Legendary Journey
+                </h2>
+                <LegendaryJourney />
               </motion.div>
             )}
           </AnimatePresence>

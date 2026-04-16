@@ -1,21 +1,108 @@
-"use client";
-import { useRouter } from 'next/navigation';
+﻿"use client";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronDown,
+} from "lucide-react";
 import { getEventsCategory, getEventsSlug } from "@/api/api";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
+const alternateTitles = [
+  "Opt 1: What’s The Scene? / What’s Up? / What’s Next?",
+  "Opt 2: The Ad ‘Clubbin’ Calendar",
+  "Opt 3: ACM Line Up / ACM Affairs / ACM Playground / ACM Billboard",
+];
 
-export default function AllEvents() {
+const eventShowcaseCategories = [
+  {
+    id: "inspire",
+    title: "Inspire",
+    tagline: "Where creativity meets recognition",
+    items: ["MADDYs", "AdTalks", "Deadline", "Sparks"],
+    details: [
+      "MADDYs: One full night (and sometimes day) of celebrating advertising every year between May and July. The MADDYs are the Oscars of Chennai’s ad world, where agencies proudly showcase craft, creativity, and campaigns that made the year unforgettable.",
+      "AdTalks: Offline meet-ups typically on the last Friday of the month. A leading voice from the industry ecosystem—creative, marketing, digital, media, innovation—shares insights over an evening that feels more like a conversation than a lecture.",
+      "Deadline: Our annual action-packed challenge. Teams crack a live client brief in just 72 hours, pushing creativity, strategy, and teamwork to the limit. Present ideas to industry judges and walk away with mentorship, internships, and bragging rights.",
+      "Sparks: Fortnightly online sessions with speakers from across India and the globe. Twenty sessions a year, typically on the 2nd and 4th Thursday, designed to ignite fresh thinking and keep you plugged into the pulse of the industry.",
+    ],
+  },
+  {
+    id: "educate",
+    title: "Educate",
+    tagline: "Where knowledge sharpens careers",
+    items: ["PGDAM", "ELEVATE", "Admates"],
+    details: [
+      "PGDAM: One flagship program per year. An offline course with 300+ hours of expert weekend sessions, designed and delivered by seasoned advertising professionals. It blends real-world insights with academic rigor, backed by internships, mentorship, and networking.",
+      "Elevate: Six sessions a year, with offline workshops every alternate month. From AI and copywriting to planning, social, and media, this is hands-on training from professionals who know how to make knowledge stick.",
+      "Admates: Our ongoing student connect program across colleges in Tamil Nadu, nurturing young talent by introducing advertising and marketing early with practical skills and industry exposure.",
+    ],
+  },
+  {
+    id: "engage",
+    title: "Engage",
+    tagline: "Where community and creativity collide",
+    items: ["Headline", "Brand & Brew", "Adrenaline"],
+    details: [
+      "Headline: Twelve issues a year. Our monthly newsletter captures the pulse of the club—student achievements, workshops, industry insights, and the most impactful campaigns shaping Chennai’s creative landscape.",
+      "Brand & Brew: Six events a year. Test your advertising and marketing savvy with our engaging quiz, held every two months. Sharpen your knowledge, win prizes, and stay connected with the club’s vibe.",
+      "Adrenaline: The most awaited annual sports event of ACM. Four sports—badminton, snow bowling, pickleball, and cricket—where adrenaline rushes, friendships are forged, and legends are born.",
+    ],
+  },
+];
+
+const groupKeywords = {
+  inspire: ["maddys", "adtalks", "ad talks", "deadline", "sparks"],
+  educate: ["pgdam", "elevate", "admates", "ad mates"],
+  engage: ["headline", "brand & brew", "brand and brew", "adrenaline", "adrenalin"],
+};
+
+const groupCategorySlugHints = {
+  inspire: ["madd", "adtalk", "deadline", "spark"],
+  educate: ["pgdam", "elevate", "admate"],
+  engage: ["headline", "brand", "brew", "adrenalin", "adrenaline"],
+};
+
+const groupCategoryTabs = {
+  inspire: [
+    { id: "maddys", label: "MADDYs", hints: ["madd"] },
+    { id: "adtalks", label: "AdTalks", hints: ["adtalk"] },
+    { id: "deadline", label: "Deadline", hints: ["deadline"] },
+    { id: "sparks", label: "Sparks", hints: ["spark"] },
+  ],
+  educate: [
+    { id: "pgdam", label: "PGDAM", hints: ["pgdam"] },
+    { id: "elevate", label: "ELEVATE", hints: ["elevate"] },
+    { id: "admates", label: "Admates", hints: ["admate"] },
+  ],
+  engage: [
+    { id: "headline", label: "Headline", hints: ["headline"] },
+    { id: "brand-brew", label: "Brand & Brew", hints: ["brand", "brew"] },
+    { id: "adrenaline", label: "Adrenaline", hints: ["adrenalin", "adrenaline"] },
+  ],
+};
+
+const eventTabs = [
+  { id: "all", label: "All", slug: "all" },
+  { id: "upcoming", label: "Upcoming", slug: "upcoming" },
+  { id: "inspire", label: "Inspire", slug: "all" },
+  { id: "educate", label: "Educate", slug: "all" },
+  { id: "engage", label: "Engage", slug: "all" },
+];
+
+export default function AllEvents({ eventGroup = "all" }) {
+  const isGroupPage = eventGroup !== "all";
   const [events, setEvents] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [activeCategoryID, setActiveCategoryID] = useState("upcoming");
+  const [activeCategoryID, setActiveCategoryID] = useState(
+    groupKeywords[eventGroup] ? eventGroup : "all"
+  );
+  const [groupTabs, setGroupTabs] = useState([]);
+  const [openShowcaseCategory, setOpenShowcaseCategory] = useState(
+    groupKeywords[eventGroup] ? eventGroup : "inspire"
+  );
 
-  const TABS_VISIBLE = 4;
-  const [startIndex, setStartIndex] = useState(0);
   const navigate = useRouter();
 
-  // --- Utils ---
   const formatTime = (seconds) => {
     if (seconds == null || isNaN(seconds)) return null;
     const h = Math.floor(seconds / 3600);
@@ -26,16 +113,19 @@ export default function AllEvents() {
   };
 
   const getDayMonthYear = (dateStr) => {
-    // returns { day: "08", mon: "Aug", year: "2025", dow: "Fri" }
     if (!dateStr) return { day: "00", mon: "Mon", year: "0000", dow: "—" };
     const parts = dateStr.split("-");
-    if (parts.length !== 3) return { day: "00", mon: "Mon", year: "0000", dow: "—" };
+    if (parts.length !== 3) {
+      return { day: "00", mon: "Mon", year: "0000", dow: "—" };
+    }
     const [y, m, d] = parts.map((p) => parseInt(p, 10));
-    if (isNaN(y) || isNaN(m) || isNaN(d)) return { day: "00", mon: "Mon", year: "0000", dow: "—" };
+    if (isNaN(y) || isNaN(m) || isNaN(d)) {
+      return { day: "00", mon: "Mon", year: "0000", dow: "—" };
+    }
 
     const date = new Date(y, m - 1, d);
-    const mon = date.toLocaleString("default", { month: "short" }); // e.g., Aug
-    const dow = date.toLocaleString("default", { weekday: "short" }); // e.g., Fri
+    const mon = date.toLocaleString("default", { month: "short" });
+    const dow = date.toLocaleString("default", { weekday: "short" });
     return {
       day: d.toString().padStart(2, "0"),
       mon,
@@ -44,24 +134,69 @@ export default function AllEvents() {
     };
   };
 
-  // Precompute category map for quick lookup
   const categoryMap = useMemo(() => {
     const map = new Map();
     categories.forEach((c) => map.set(c.id, c.name));
     return map;
   }, [categories]);
 
-  // --- Data loaders ---
-  const loadEventsBySlug = async (categorySlug, id) => {
+  const loadEventsByTab = async (tabId, categoriesForLookup = categories) => {
+    try {
+      const tab = eventTabs.find((item) => item.id === tabId) || eventTabs[0];
+      let eventsFromApi = [];
+
+      if (groupCategorySlugHints[tabId]) {
+        const hints = groupCategorySlugHints[tabId];
+        const matchedCategories = categoriesForLookup.filter((cat) => {
+          const slug = (cat.categorySlug || "").toLowerCase();
+          const name = (cat.name || "").toLowerCase();
+          return hints.some(
+            (hint) => slug.includes(hint) || name.includes(hint)
+          );
+        });
+
+        const groupedResponses = await Promise.all(
+          matchedCategories.map((cat) => getEventsSlug(cat.categorySlug))
+        );
+        eventsFromApi = groupedResponses.flat();
+      } else {
+        eventsFromApi = await getEventsSlug(tab.slug);
+      }
+
+      const dedupedEvents = Array.from(
+        new Map(eventsFromApi.map((event) => [event.id, event])).values()
+      );
+
+      const sortedFilteredEvents = dedupedEvents.sort(
+        (a, b) =>
+          new Date(b.eventDate || "1970-01-01") -
+          new Date(a.eventDate || "1970-01-01")
+      );
+      setEvents(sortedFilteredEvents);
+      setActiveCategoryID(tabId);
+    } catch (err) {
+      console.error("Error loading events:", err);
+    }
+  };
+
+  const loadEventsByCategorySlug = async (categorySlug, id) => {
+    if (!categorySlug) {
+      setEvents([]);
+      setActiveCategoryID(id);
+      return;
+    }
+
     try {
       const res = await getEventsSlug(categorySlug);
       const sortedEvents = res.sort(
-        (a, b) => new Date(b.eventDate || "1970-01-01") - new Date(a.eventDate || "1970-01-01")
+        (a, b) =>
+          new Date(b.eventDate || "1970-01-01") -
+          new Date(a.eventDate || "1970-01-01")
       );
       setEvents(sortedEvents);
       setActiveCategoryID(id);
     } catch (err) {
-      console.error("Error loading events:", err);
+      console.error("Error loading events by category slug:", err);
     }
   };
 
@@ -75,96 +210,189 @@ export default function AllEvents() {
           categorySlug: cat.categorySlug,
         }));
 
-        const defaultTabs = [
-          { id: "all", name: "All", categorySlug: "all" },
-          { id: "upcoming", name: "Upcoming", categorySlug: "upcoming" },
-        ];
+        setCategories(formatted);
 
-        const mergedTabs = [...defaultTabs, ...formatted];
-        setCategories(mergedTabs);
+        if (isGroupPage) {
+          const configuredTabs = groupCategoryTabs[eventGroup] || [];
+          const matchedTabs = configuredTabs.map((tab) => {
+            const matchedCategory = formatted.find((cat) => {
+              const slug = (cat.categorySlug || "").toLowerCase();
+              const name = (cat.name || "").toLowerCase();
+              return tab.hints.some(
+                (hint) => slug.includes(hint) || name.includes(hint)
+              );
+            });
 
-        // initial load
-        loadEventsBySlug("all", "all");
+            return {
+              id: tab.id,
+              label: tab.label,
+              categorySlug: matchedCategory?.categorySlug || "",
+            };
+          });
+
+          setGroupTabs(matchedTabs);
+
+          const firstAvailable = matchedTabs.find((tab) => tab.categorySlug);
+          if (firstAvailable) {
+            loadEventsByCategorySlug(firstAvailable.categorySlug, firstAvailable.id);
+          } else {
+            setEvents([]);
+          }
+        } else {
+          loadEventsByTab("all", formatted);
+        }
       } catch (err) {
         console.error("Failed to fetch categories", err);
       }
     };
 
     fetchData();
-  }, []);
+  }, [eventGroup]);
 
-  const handlePrev = () => {
-    setStartIndex((s) => Math.max(0, s - 1));
+  const toggleShowcaseCategory = (categoryId) => {
+    setOpenShowcaseCategory((prev) => (prev === categoryId ? "" : categoryId));
   };
 
-  const handleNext = () => {
-    setStartIndex((s) => (s + TABS_VISIBLE < categories.length ? s + 1 : s));
-  };
-
-  const visibleTabs = categories.slice(startIndex, startIndex + TABS_VISIBLE);
+  const pageHeroTitle = isGroupPage
+    ? `${eventGroup.charAt(0).toUpperCase()}${eventGroup.slice(1)} Events`
+    : "What's The Scene?";
+  const showcaseCategories = isGroupPage
+    ? eventShowcaseCategories.filter((item) => item.id === eventGroup)
+    : eventShowcaseCategories;
 
   return (
-    <section className="relative bg-black min-h-screen text-white mt-20 px-4 sm:px-6 md:px-12 py-16 overflow-hidden">
-      <div className="max-w-6xl mx-auto space-y-10">
-        {/* 🔘 Event Count */}
-        <div className="flex justify-end text-xs sm:text-sm font-bold text-white tracking-wide">
+    <section className="relative mt-20 min-h-screen overflow-hidden bg-black px-4 py-16 text-white sm:px-6 md:px-12">
+      <div className="mx-auto max-w-6xl space-y-10">
+        <div className="rounded-[18px] border border-primary/40 bg-white/[0.04] p-6 sm:p-8">
+          <p className="font-asgard text-sm uppercase tracking-[0.24em] text-primary">
+            Events
+          </p>
+          <h1 className="mt-4 font-asgard text-4xl font-extrabold uppercase leading-tight sm:text-5xl">
+            {pageHeroTitle}
+          </h1>
+          <p className="mt-4 font-asgard text-xl font-bold uppercase text-primary sm:text-2xl">
+            Inspire. Educate. Engage.
+          </p>
+          <p className="mt-5 max-w-4xl font-glancyr text-base leading-8 text-white/85 sm:text-lg">
+            Welcome to the calendar that keeps Chennai&apos;s advertising story alive.
+            At Ad Club Madras, our experiences aren&apos;t just events — they&apos;re campaigns
+            for creativity, workshops for wisdom, and festivals for fun. Think of this
+            page as your billboard to what&apos;s next.
+          </p>
+
+          {!isGroupPage && (
+            <div className="mt-6">
+              <p className="font-asgard text-xs uppercase tracking-[0.2em] text-white/70">
+                Events Page Alternate Titles
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {alternateTitles.map((title) => (
+                  <span
+                    key={title}
+                    className="rounded-full border border-white/20 px-4 py-2 font-glancyr text-xs text-white/80 sm:text-sm"
+                  >
+                    {title}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-4">
+          {showcaseCategories.map((category) => {
+            const isOpen = isGroupPage || openShowcaseCategory === category.id;
+
+            return (
+              <div
+                key={category.id}
+                className="overflow-hidden rounded-[16px] border border-white/15 bg-white/[0.03]"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleShowcaseCategory(category.id)}
+                  className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left sm:px-6"
+                >
+                  <div>
+                    <h2 className="font-asgard text-3xl font-extrabold uppercase text-primary">
+                      {category.title}
+                    </h2>
+                    <p className="mt-1 font-glancyr text-sm text-white/78 sm:text-base">
+                      {category.tagline}
+                    </p>
+                    <p className="mt-2 font-glancyr text-xs uppercase tracking-[0.12em] text-white/65">
+                      {category.items.join(" • ")}
+                    </p>
+                  </div>
+                  {!isGroupPage && (
+                    <ChevronDown
+                      className={`h-6 w-6 text-primary transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </button>
+
+                {isOpen && (
+                  <div className="space-y-3 border-t border-white/10 px-5 py-4 sm:px-6">
+                    {category.details.map((detail) => (
+                      <div
+                        key={detail}
+                        className="rounded-xl border border-primary/20 bg-black/45 p-4"
+                      >
+                        <p className="font-glancyr text-sm leading-7 text-white/82 sm:text-base">
+                          {detail}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="flex justify-end text-xs font-bold tracking-wide text-white sm:text-sm">
           Total Events: <span className="ml-2 text-primary">{events.length}</span>
         </div>
 
-        {/* 🔘 Tabs */}
-        <div className="flex justify-center items-center gap-8 mb-10 text-sm sm:text-base font-bold uppercase font-asgard">
-          <button
-            onClick={handlePrev}
-            disabled={startIndex === 0}
-            className={`p-1 rounded ${startIndex === 0 ? "opacity-40 cursor-not-allowed" : "hover:bg-white/10"}`}
-            aria-label="Previous tabs"
-          >
-            <ChevronLeft className="w-6 h-6 text-primary" />
-          </button>
-
-          <div className="flex gap-8 items-center">
-            {visibleTabs.map((cat, index) => (
-              <React.Fragment key={cat.id ?? `tab-${index}`}>
-                <div className="relative w-20 h-20 flex items-center justify-center">
-                  {activeCategoryID === cat.id && (
-                    <div className="absolute inset-0 scale-110">
-                      <DotLottieReact
-                        src="/circleanime.lottie"
-                        loop
-                        autoplay
-                        style={{ width: "100%", height: "100%" }}
-                      />
-                    </div>
-                  )}
-                  <button
-                    onClick={() => loadEventsBySlug(cat.categorySlug, cat.id)}
-                    className={`relative z-10 px-4 py-2 text-xs sm:text-sm font-bold uppercase rounded-full transition duration-300 ${
-                      activeCategoryID === cat.id ? "text-primary" : "text-white hover:text-primary"
-                    }`}
-                  >
-                    {cat.name}
-                  </button>
-                </div>
-                {index !== visibleTabs.length - 1 && (
-                  <span className="text-primary select-none">|</span>
-                )}
-              </React.Fragment>
+        {isGroupPage ? (
+          <div className="mb-10 flex flex-wrap items-center justify-center gap-3 font-asgard text-sm font-bold uppercase sm:text-base">
+            {groupTabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => loadEventsByCategorySlug(tab.categorySlug, tab.id)}
+                disabled={!tab.categorySlug}
+                className={`rounded-full border px-5 py-2 transition ${
+                  activeCategoryID === tab.id
+                    ? "border-primary bg-primary text-black"
+                    : "border-white/25 text-white hover:border-primary hover:text-primary"
+                } ${!tab.categorySlug ? "cursor-not-allowed opacity-50" : ""}`}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
+        ) : (
+          <div className="mb-10 flex flex-wrap items-center justify-center gap-3 font-asgard text-sm font-bold uppercase sm:text-base">
+            {eventTabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => loadEventsByTab(tab.id)}
+                className={`rounded-full border px-5 py-2 transition ${
+                  activeCategoryID === tab.id
+                    ? "border-primary bg-primary text-black"
+                    : "border-white/25 text-white hover:border-primary hover:text-primary"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        )}
 
-          <button
-            onClick={handleNext}
-            disabled={startIndex + TABS_VISIBLE >= categories.length}
-            className={`p-1 rounded ${
-              startIndex + TABS_VISIBLE >= categories.length ? "opacity-40 cursor-not-allowed" : "hover:bg-white/10"
-            }`}
-            aria-label="Next tabs"
-          >
-            <ChevronRight className="w-6 h-6 text-primary" />
-          </button>
-        </div>
-
-        {/* 🔘 Events List */}
         {events.map((event) => {
           const { dow, mon, year, day } = getDayMonthYear(event.eventDate);
           const startTime = formatTime(event.eventTime);
@@ -172,20 +400,18 @@ export default function AllEvents() {
 
           return (
             <div key={event.id} className="border-b border-dashed border-gray-700 pb-6">
-              <div className="group flex flex-col sm:grid sm:grid-cols-11 gap-4 p-4 rounded-md hover:shadow-lg transition">
-                {/* Date */}
-                <div className="w-full sm:col-span-1 h-20 flex flex-col items-center justify-center rounded font-bold text-xs bg-white text-black group-hover:bg-primary transition-colors">
+              <div className="group flex flex-col gap-4 rounded-md p-4 transition hover:shadow-lg sm:grid sm:grid-cols-11">
+                <div className="flex h-20 w-full flex-col items-center justify-center rounded bg-white text-xs font-bold text-black transition-colors group-hover:bg-primary sm:col-span-1">
                   <span className="uppercase">{dow || "—"}</span>
-                  <span className="border-t border-black w-10 py-1" />
+                  <span className="w-10 border-t border-black py-1" />
                   <span className="text-xl font-black leading-none">{day}</span>
                   <span className="text-[10px] font-bold uppercase">
                     {mon} {year}
                   </span>
                 </div>
 
-                {/* Title & (optional) time */}
-                <div className="sm:col-span-6 p-3">
-                  <p className="text-sm sm:text-base lg:text-lg font-semibold font-glancyr break-words">
+                <div className="p-3 sm:col-span-6">
+                  <p className="break-words font-glancyr text-sm font-semibold sm:text-base lg:text-lg">
                     {event.eventTitle}
                   </p>
                   {(startTime || endTime) && (
@@ -196,23 +422,21 @@ export default function AllEvents() {
                   )}
                 </div>
 
-                {/* Category */}
-                <span className="sm:col-span-2 text-[10px] sm:text-sm uppercase font-glancyr border border-white px-3 py-1 rounded-full w-fit h-fit self-center">
+                <span className="h-fit w-fit self-center rounded-full border border-white px-3 py-1 font-glancyr text-[10px] uppercase sm:col-span-2 sm:text-sm">
                   {categoryMap.get(event.eventCategoryID) ?? "Unknown"}
                 </span>
 
-                {/* View Button */}
-                <div className="sm:col-span-2 flex sm:justify-end">
+                <div className="flex sm:col-span-2 sm:justify-end">
                   <button
                     onClick={() => navigate.push(`/events/${event.eventSlug}`)}
-                    className="relative w-10 h-10 rounded-full bg-primary flex items-center justify-center hover:w-28 transition-all focus:outline-none focus:ring-2 focus:ring-primary/60 overflow-hidden"
+                    className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-primary transition-all hover:w-28 focus:outline-none focus:ring-2 focus:ring-primary/60"
                     aria-label={`View details for ${event.eventTitle}`}
                   >
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <ArrowRight className="w-4 h-4 text-black" />
+                      <ArrowRight className="h-4 w-4 text-black" />
                     </div>
-                    <div className="absolute inset-0 opacity-0 hover:opacity-100 flex items-center justify-center transition-opacity">
-                      <span className="text-black text-[10px] sm:text-xs font-bold uppercase tracking-wide">
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity hover:opacity-100">
+                      <span className="text-[10px] font-bold uppercase tracking-wide text-black sm:text-xs">
                         View Details
                       </span>
                     </div>
@@ -226,3 +450,4 @@ export default function AllEvents() {
     </section>
   );
 }
+

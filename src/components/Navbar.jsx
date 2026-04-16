@@ -14,7 +14,7 @@ const NavLink = ({ to, className, children, onClick }) => {
   );
 };
 
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 const logo = "/ad-logo.png";
 import { useTheme } from "@/context/ThemeContext";
@@ -122,10 +122,33 @@ export default function Navbar() {
           </ul>
 
           <ul className="flex flex-col gap-2">
-            <li>
-              <NavLink to="/events" className={navLinkClass}>
-                Events
-              </NavLink>
+            <li className="group relative">
+              <div className="flex items-center">
+                <NavLink to="/events" className={navLinkClass}>
+                  Events
+                </NavLink>
+                <ChevronDown className="h-4 w-4 text-white/70" />
+              </div>
+              <div className="invisible absolute left-0 top-full z-50 mt-1 w-52 rounded-md border border-white/10 bg-black/95 p-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                <NavLink
+                  to="/events/inspire"
+                  className="block rounded-md px-3 py-2 font-glancyr text-xs normal-case text-white hover:bg-white/10 hover:text-primary"
+                >
+                  Inspire Events
+                </NavLink>
+                <NavLink
+                  to="/events/educate"
+                  className="block rounded-md px-3 py-2 font-glancyr text-xs normal-case text-white hover:bg-white/10 hover:text-primary"
+                >
+                  Educate Events
+                </NavLink>
+                <NavLink
+                  to="/events/engage"
+                  className="block rounded-md px-3 py-2 font-glancyr text-xs normal-case text-white hover:bg-white/10 hover:text-primary"
+                >
+                  Engage Events
+                </NavLink>
+              </div>
             </li>
             <li>
               <NavLink to="/gallery" className={navLinkClass}>
@@ -241,6 +264,15 @@ export default function Navbar() {
         </NavLink>
         <NavLink to="/events" onClick={closeMenu} className={navLinkClass}>
           Events
+        </NavLink>
+        <NavLink to="/events/inspire" onClick={closeMenu} className={navLinkClass}>
+          Inspire Events
+        </NavLink>
+        <NavLink to="/events/educate" onClick={closeMenu} className={navLinkClass}>
+          Educate Events
+        </NavLink>
+        <NavLink to="/events/engage" onClick={closeMenu} className={navLinkClass}>
+          Engage Events
         </NavLink>
         <NavLink to="/gallery" onClick={closeMenu} className={navLinkClass}>
           Gallery

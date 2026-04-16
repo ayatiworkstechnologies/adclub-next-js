@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -38,15 +38,43 @@ function BannerButton({ children }) {
   );
 }
 
-export default function WhyAdClubMadras() {
+export default function WhyAdClubMadras({ layout = "default" }) {
+  const isPanel = layout === "panel";
+  const sectionClassName = isPanel
+    ? ""
+    : "bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24";
+  const containerClassName = isPanel ? "" : "mx-auto max-w-6xl";
+  const slideItems = useMemo(() => [...bannerItems, bannerItems[0]], []);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [hasTransition, setHasTransition] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => prev + 1);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSliderTransitionEnd = () => {
+    if (activeSlide !== bannerItems.length) return;
+    setHasTransition(false);
+    setActiveSlide(0);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setHasTransition(true);
+      });
+    });
+  };
+
   return (
-    <section className="bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24">
+    <section className={sectionClassName}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.35 }}
-        className="mx-auto max-w-6xl"
+        className={containerClassName}
       >
         <div className="grid gap-8 rounded-[18px] border border-primary/40 bg-white/[0.04] p-6 shadow-xl sm:p-8 lg:grid-cols-[0.82fr_1.18fr] lg:p-10">
           <div className="flex flex-col justify-between gap-10">
@@ -82,20 +110,24 @@ export default function WhyAdClubMadras() {
         </div>
 
         <div className="mt-6 overflow-hidden rounded-[18px] border border-white/10">
-          <motion.div
-            className="flex w-[300%]"
-            animate={{ x: ["0%", "-33.333333%", "-66.666667%", "0%"] }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-              times: [0, 0.33, 0.66, 1],
+          <div
+            className="flex"
+            onTransitionEnd={handleSliderTransitionEnd}
+            style={{
+              width: `${slideItems.length * 100}%`,
+              transform: `translateX(-${activeSlide * (100 / slideItems.length)}%)`,
+              transition: hasTransition ? "transform 0.7s ease-in-out" : "none",
             }}
           >
-            {bannerItems.map((item, index) => (
+            {slideItems.map((item, index) => (
               <div
-                key={item.title}
-                className="group relative min-h-[440px] w-1/3 shrink-0 overflow-hidden bg-black sm:min-h-[520px]"
+                key={`${item.title}-${index}`}
+                className={`group relative shrink-0 overflow-hidden bg-black ${
+                  isPanel
+                    ? "min-h-[320px] sm:min-h-[420px]"
+                    : "min-h-[440px] sm:min-h-[520px]"
+                }`}
+                style={{ width: `${100 / slideItems.length}%` }}
               >
                 <img
                   src={item.image}
@@ -105,7 +137,7 @@ export default function WhyAdClubMadras() {
                 <div className="absolute inset-0 bg-black/35" />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/82 to-transparent p-6 pt-24 sm:p-8 sm:pt-32 lg:p-10 lg:pt-40">
                   <span className="rounded-full bg-primary px-4 py-2 font-glancyr text-sm font-bold text-black">
-                    Banner {String(index + 1).padStart(2, "0")}
+                    Banner {String((index % bannerItems.length) + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-4 font-asgard text-4xl font-extrabold uppercase text-white sm:text-5xl lg:text-6xl">
                     {item.title}
@@ -119,7 +151,7 @@ export default function WhyAdClubMadras() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </section>

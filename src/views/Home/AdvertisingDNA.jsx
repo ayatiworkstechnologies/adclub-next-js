@@ -18,10 +18,18 @@ const stats = [
   },
 ];
 
-export default function AdvertisingDNA() {
+export default function AdvertisingDNA({ layout = "default" }) {
+  const isPanel = layout === "panel";
+
+  const wrapperClassName = isPanel
+    ? ""
+    : "relative overflow-hidden bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24";
+
+  const containerClassName = isPanel ? "" : "mx-auto max-w-6xl";
+
   return (
-    <section className="relative overflow-hidden bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24">
-      <div className="mx-auto max-w-6xl">
+    <section className={wrapperClassName}>
+      <div className={containerClassName}>
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}

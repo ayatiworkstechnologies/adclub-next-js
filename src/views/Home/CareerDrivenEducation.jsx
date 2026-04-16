@@ -5,17 +5,24 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-export default function CareerDrivenEducation() {
+export default function CareerDrivenEducation({ layout = "default" }) {
   const navigate = useRouter();
+  const isPanel = layout === "panel";
+  const sectionClassName = isPanel
+    ? ""
+    : "bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24";
+  const contentClassName = isPanel
+    ? "h-full overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.04] shadow-xl"
+    : "mx-auto max-w-6xl overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.04] shadow-xl";
 
   return (
-    <section className="bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24">
+    <section className={sectionClassName}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.35 }}
-        className="mx-auto max-w-6xl overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.04] shadow-xl"
+        className={contentClassName}
       >
         <div className="grid lg:grid-cols-[0.92fr_1.08fr]">
           <div className="relative min-h-[340px] overflow-hidden lg:min-h-[560px]">
