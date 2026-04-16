@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
@@ -10,24 +11,27 @@ const bannerItems = [
     text: "Meet the people, ideas, and creative work shaping what advertising can become.",
     image: "/assets/Events.png",
     cta: "Explore Events",
+    path: "/events/inspire",
   },
   {
     title: "Educate",
     text: "Learn from programmes, talks, and industry sessions built for tomorrow's talent.",
     image: "/assets/pgda-banner.jpg",
     cta: "View Programmes",
+    path: "/events/educate",
   },
   {
     title: "Engage",
     text: "Join a citywide community where bold campaigns, awards, and conversations find their stage.",
     image: "/events/eventbanner3.jpg",
     cta: "Join The Movement",
+    path: "/events/engage",
   },
 ];
 
-function BannerButton({ children }) {
+function BannerButton({ children, onClick }) {
   return (
-    <button type="button" className="flex w-fit items-center group/btn">
+    <button type="button" onClick={onClick} className="flex w-fit items-center group/btn">
       <span className="rounded-full bg-white px-6 py-3 font-asgard text-base font-bold uppercase text-black transition duration-300 hover:bg-primary group-hover/btn:bg-primary group-hover/btn:text-black">
         {children}
       </span>
@@ -39,6 +43,7 @@ function BannerButton({ children }) {
 }
 
 export default function WhyAdClubMadras({ layout = "default" }) {
+  const navigate = useRouter();
   const isPanel = layout === "panel";
   const sectionClassName = isPanel
     ? ""
@@ -50,14 +55,20 @@ export default function WhyAdClubMadras({ layout = "default" }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveSlide((prev) => prev + 1);
+      setActiveSlide((prev) => {
+        if (prev >= bannerItems.length) return prev;
+        return prev + 1;
+      });
     }, 4000);
 
     return () => clearInterval(interval);
   }, []);
 
-  const handleSliderTransitionEnd = () => {
-    if (activeSlide !== bannerItems.length) return;
+  const handleSliderTransitionEnd = (event) => {
+    if (event.target !== event.currentTarget || event.propertyName !== "transform") {
+      return;
+    }
+    if (activeSlide < bannerItems.length) return;
     setHasTransition(false);
     setActiveSlide(0);
     requestAnimationFrame(() => {
@@ -90,21 +101,37 @@ export default function WhyAdClubMadras({ layout = "default" }) {
 
           <div className="space-y-6">
             <p className="font-glancyr text-base leading-8 text-white/82 sm:text-lg">
-              Be part of a community that defines advertising in India, right
-              here in Chennai, where creativity thrives, careers accelerate, and
-              bold ideas find their stage. For decades, Ad Club Madras has been
-              the place where the industry's brightest minds come together to
-              inspire, educate, and engage.
+              Be part of a community that{" "}
+              <span className="font-bold text-primary">
+                defines advertising in India
+              </span>
+              , right here in Chennai, where creativity thrives, careers
+              accelerate, and{" "}
+              <span className="font-bold text-primary">
+                bold ideas find their stage
+              </span>
+              . For decades, Ad Club Madras has been the place where the
+              industry&apos;s brightest minds come together to{" "}
+              <span className="font-bold text-primary">
+                inspire, educate, and engage
+              </span>
+              .
             </p>
             <p className="font-glancyr text-base leading-8 text-white/82 sm:text-lg">
-              This is more than a calendar of events; it's a movement that keeps
-              the pulse of advertising alive and future-ready.
+              This is more than a calendar of events; it&apos;s a{" "}
+              <span className="font-bold text-primary">
+                movement that keeps the pulse of advertising alive and
+                future-ready
+              </span>
+              .
             </p>
             <p className="font-asgard text-2xl font-extrabold uppercase text-primary sm:text-3xl">
               Inspire. Educate. Engage.
             </p>
             <p className="font-glancyr text-base leading-7 text-white/72">
-              That's not just our tagline, it's our DNA.
+              <span className="font-bold text-primary">
+                That&apos;s not just our tagline, it&apos;s our DNA.
+              </span>
             </p>
           </div>
         </div>
@@ -146,7 +173,9 @@ export default function WhyAdClubMadras({ layout = "default" }) {
                     {item.text}
                   </p>
                   <div className="mt-7">
-                    <BannerButton>{item.cta}</BannerButton>
+                    <BannerButton onClick={() => navigate.push(item.path)}>
+                      {item.cta}
+                    </BannerButton>
                   </div>
                 </div>
               </div>

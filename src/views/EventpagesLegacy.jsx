@@ -1,7 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  ChevronLeft,
+  ChevronRight,
+  Flame,
+  GraduationCap,
+  Sparkles,
+  Trophy,
+  Users2,
+} from "lucide-react";
 import { getEventsCategory, getEventsSlug } from "@/api/api";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
@@ -13,6 +23,20 @@ export default function EventpagesLegacy() {
   const navigate = useRouter();
 
   const TABS_VISIBLE = 4;
+
+  const getTabIcon = (tabName = "") => {
+    const normalized = tabName.toLowerCase();
+    if (normalized.includes("all")) return CalendarDays;
+    if (normalized.includes("upcoming")) return CalendarDays;
+    if (normalized.includes("gyan")) return GraduationCap;
+    if (normalized.includes("sports")) return Trophy;
+    if (normalized.includes("madd")) return Flame;
+    if (normalized.includes("adtalk")) return Sparkles;
+    if (normalized.includes("deadline")) return Sparkles;
+    if (normalized.includes("spark")) return Sparkles;
+    if (normalized.includes("headline")) return Users2;
+    return CalendarDays;
+  };
 
   const formatTime = (seconds) => {
     if (seconds == null || isNaN(seconds)) return null;
@@ -133,7 +157,10 @@ export default function EventpagesLegacy() {
                       activeCategoryID === category.id ? "text-primary" : "text-white hover:text-primary"
                     }`}
                   >
-                    {category.name}
+                    <span className="inline-flex items-center gap-2">
+                      {React.createElement(getTabIcon(category.name), { className: "h-4 w-4" })}
+                      {category.name}
+                    </span>
                   </button>
                 </div>
                 {index !== visibleTabs.length - 1 && <span className="select-none text-primary">|</span>}
@@ -171,8 +198,9 @@ export default function EventpagesLegacy() {
                 </div>
 
                 <div className="p-3 sm:col-span-6">
-                  <p className="break-words font-glancyr text-sm font-semibold sm:text-base lg:text-lg">
-                    {event.eventTitle}
+                  <p className="flex items-start gap-2 break-words font-glancyr text-sm font-semibold sm:text-base lg:text-lg">
+                    <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{event.eventTitle}</span>
                   </p>
                   {(startTime || endTime) && (
                     <p className="mt-2 text-xs opacity-80">

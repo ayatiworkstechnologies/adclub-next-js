@@ -45,12 +45,20 @@ export default function CareerDrivenEducation({ layout = "default" }) {
               For tomorrow's trailblazers
             </h2>
             <p className="mt-6 font-glancyr text-base leading-8 text-white/82 sm:text-lg">
-              We don't just host events, we build futures. Through our flagship
-              Post Graduate Diploma in Advertising & Marketing (PGDAM),
-              professionals can upskill, sharpen expertise, and stay ahead of
-              industry trends. Deputed colleagues and students gain exclusive
-              member discounts, making advertising future-focused education in
-              Chennai more accessible and impactful.
+              <span className="font-bold text-primary">
+                We don&apos;t just host events, we build futures.
+              </span>{" "}
+              Through our flagship{" "}
+              <span className="font-bold text-primary">
+                Post Graduate Diploma in Advertising & Marketing (PGDAM)
+              </span>
+              , professionals can{" "}
+              <span className="font-bold text-primary">
+                upskill, sharpen expertise, and stay ahead of industry trends
+              </span>
+              . Deputed colleagues and students gain exclusive member discounts,
+              making advertising future-focused education in Chennai more
+              accessible and impactful.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3 font-glancyr text-sm text-white/72">

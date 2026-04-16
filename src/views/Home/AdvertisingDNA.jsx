@@ -59,15 +59,23 @@ export default function AdvertisingDNA({ layout = "default" }) {
 
           <div className="flex flex-col justify-between rounded-[18px] border border-white/10 bg-white/[0.04] p-6 shadow-xl sm:p-8 lg:p-10">
             <p className="font-glancyr text-base leading-8 text-white/82 sm:text-lg">
-              Our advertising and creative community in Chennai powers through a
-              year-round calendar of marketing and advertising events in the
-              city, setting the standard for what's next globally. For over four
-              decades, we've honored excellence through MADDYs Advertising
-              Awards, spotlighting the best in the business and inspiring the
-              next generation of talent. In 2024, the MADDYs Awards broke
-              records with unprecedented entries and introduced India's first
-              Musical Logo (MOGO), proving our commitment to innovation,
-              relevance, and active creative community participation.
+              Our advertising and creative community in Chennai powers through a{" "}
+              <span className="font-bold text-primary">
+                year-round calendar of marketing and advertising events
+              </span>{" "}
+              in the city, setting the standard for what&apos;s next globally. For
+              over four decades, we&apos;ve{" "}
+              <span className="font-bold text-primary">
+                honored excellence through MADDYs Advertising Awards
+              </span>
+              , spotlighting the best in the business and inspiring the next
+              generation of talent. In 2024, the{" "}
+              <span className="font-bold text-primary">
+                MADDYs Awards broke records with unprecedented entries and
+                introduced India&apos;s first Musical Logo (MOGO)
+              </span>
+              , proving our commitment to innovation, relevance, and active
+              creative community participation.
             </p>
 
             <div className="mt-8 grid gap-0 overflow-hidden rounded-[14px] border border-primary/40 sm:grid-cols-3">

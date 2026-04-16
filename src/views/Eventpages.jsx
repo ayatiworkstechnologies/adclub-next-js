@@ -3,7 +3,13 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
+  CalendarDays,
   ChevronDown,
+  Flame,
+  GraduationCap,
+  Megaphone,
+  Sparkles,
+  Users2,
 } from "lucide-react";
 import { getEventsCategory, getEventsSlug } from "@/api/api";
 
@@ -50,6 +56,12 @@ const eventShowcaseCategories = [
   },
 ];
 
+const categoryIcons = {
+  inspire: Sparkles,
+  educate: GraduationCap,
+  engage: Users2,
+};
+
 const groupKeywords = {
   inspire: ["maddys", "adtalks", "ad talks", "deadline", "sparks"],
   educate: ["pgdam", "elevate", "admates", "ad mates"],
@@ -88,6 +100,64 @@ const eventTabs = [
   { id: "educate", label: "Educate", slug: "all" },
   { id: "engage", label: "Engage", slug: "all" },
 ];
+
+const tabIcons = {
+  all: CalendarDays,
+  upcoming: CalendarDays,
+  inspire: Sparkles,
+  educate: GraduationCap,
+  engage: Users2,
+  maddys: Flame,
+  adtalks: Megaphone,
+  deadline: Sparkles,
+  sparks: Sparkles,
+  pgdam: GraduationCap,
+  elevate: GraduationCap,
+  admates: Users2,
+  headline: Megaphone,
+  "brand-brew": Users2,
+  adrenaline: Flame,
+};
+
+const heroHighlights = [
+  "Chennai's advertising story",
+  "campaigns for creativity",
+  "workshops for wisdom",
+  "festivals for fun",
+  "billboard to what's next",
+];
+
+const categoryDetailHighlights = {
+  inspire: ["MADDYs", "AdTalks", "Deadline", "Sparks", "72 hours", "mentorship", "internships"],
+  educate: ["PGDAM", "Elevate", "Admates", "300+ hours", "internships", "mentorship"],
+  engage: ["Headline", "Brand & Brew", "Adrenaline", "quiz", "badminton", "pickleball", "cricket"],
+};
+
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const highlightText = (text, phrases = []) => {
+  let parts = [text];
+  const sortedPhrases = [...phrases].sort((first, second) => second.length - first.length);
+
+  sortedPhrases.forEach((phrase) => {
+    const regex = new RegExp(`(${escapeRegExp(phrase)})`, "gi");
+    parts = parts.flatMap((part) => {
+      if (typeof part !== "string") return [part];
+      return part.split(regex).map((chunk, index) => {
+        if (index % 2 === 1) {
+          return (
+            <span key={`${phrase}-${index}`} className="font-bold text-primary">
+              {chunk}
+            </span>
+          );
+        }
+        return chunk;
+      });
+    });
+  });
+
+  return parts;
+};
 
 export default function AllEvents({ eventGroup = "all" }) {
   const isGroupPage = eventGroup !== "all";
@@ -274,10 +344,10 @@ export default function AllEvents({ eventGroup = "all" }) {
             Inspire. Educate. Engage.
           </p>
           <p className="mt-5 max-w-4xl font-glancyr text-base leading-8 text-white/85 sm:text-lg">
-            Welcome to the calendar that keeps Chennai&apos;s advertising story alive.
-            At Ad Club Madras, our experiences aren&apos;t just events — they&apos;re campaigns
-            for creativity, workshops for wisdom, and festivals for fun. Think of this
-            page as your billboard to what&apos;s next.
+            {highlightText(
+              "Welcome to the calendar that keeps Chennai's advertising story alive. At Ad Club Madras, our experiences aren't just events — they're campaigns for creativity, workshops for wisdom, and festivals for fun. Think of this page as your billboard to what's next.",
+              heroHighlights
+            )}
           </p>
 
           {!isGroupPage && (
@@ -314,8 +384,11 @@ export default function AllEvents({ eventGroup = "all" }) {
                   className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left sm:px-6"
                 >
                   <div>
-                    <h2 className="font-asgard text-3xl font-extrabold uppercase text-primary">
-                      {category.title}
+                    <h2 className="flex items-center gap-2 font-asgard text-3xl font-extrabold uppercase text-primary">
+                      {React.createElement(categoryIcons[category.id] || Sparkles, {
+                        className: "h-7 w-7",
+                      })}
+                      <span>{category.title}</span>
                     </h2>
                     <p className="mt-1 font-glancyr text-sm text-white/78 sm:text-base">
                       {category.tagline}
@@ -341,7 +414,7 @@ export default function AllEvents({ eventGroup = "all" }) {
                         className="rounded-xl border border-primary/20 bg-black/45 p-4"
                       >
                         <p className="font-glancyr text-sm leading-7 text-white/82 sm:text-base">
-                          {detail}
+                          {highlightText(detail, categoryDetailHighlights[category.id] || [])}
                         </p>
                       </div>
                     ))}
@@ -358,7 +431,9 @@ export default function AllEvents({ eventGroup = "all" }) {
 
         {isGroupPage ? (
           <div className="mb-10 flex flex-wrap items-center justify-center gap-3 font-asgard text-sm font-bold uppercase sm:text-base">
-            {groupTabs.map((tab) => (
+            {groupTabs.map((tab) => {
+              const TabIcon = tabIcons[tab.id] || Sparkles;
+              return (
               <button
                 key={tab.id}
                 type="button"
@@ -370,13 +445,19 @@ export default function AllEvents({ eventGroup = "all" }) {
                     : "border-white/25 text-white hover:border-primary hover:text-primary"
                 } ${!tab.categorySlug ? "cursor-not-allowed opacity-50" : ""}`}
               >
-                {tab.label}
+                <span className="inline-flex items-center gap-2">
+                  <TabIcon className="h-4 w-4" />
+                  {tab.label}
+                </span>
               </button>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="mb-10 flex flex-wrap items-center justify-center gap-3 font-asgard text-sm font-bold uppercase sm:text-base">
-            {eventTabs.map((tab) => (
+            {eventTabs.map((tab) => {
+              const TabIcon = tabIcons[tab.id] || CalendarDays;
+              return (
               <button
                 key={tab.id}
                 type="button"
@@ -387,9 +468,13 @@ export default function AllEvents({ eventGroup = "all" }) {
                     : "border-white/25 text-white hover:border-primary hover:text-primary"
                 }`}
               >
-                {tab.label}
+                <span className="inline-flex items-center gap-2">
+                  <TabIcon className="h-4 w-4" />
+                  {tab.label}
+                </span>
               </button>
-            ))}
+              );
+            })}
           </div>
         )}
 
@@ -411,8 +496,9 @@ export default function AllEvents({ eventGroup = "all" }) {
                 </div>
 
                 <div className="p-3 sm:col-span-6">
-                  <p className="break-words font-glancyr text-sm font-semibold sm:text-base lg:text-lg">
-                    {event.eventTitle}
+                  <p className="flex items-start gap-2 break-words font-glancyr text-sm font-semibold sm:text-base lg:text-lg">
+                    <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    <span>{event.eventTitle}</span>
                   </p>
                   {(startTime || endTime) && (
                     <p className="mt-2 text-xs opacity-80">
