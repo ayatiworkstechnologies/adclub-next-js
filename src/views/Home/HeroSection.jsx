@@ -1,11 +1,10 @@
 "use client";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 const bgGraphic = "/assets/hero-fream.svg";
 import { useTheme } from "@/context/ThemeContext";
 import { motion } from "framer-motion";
 const maddyImage = "/maddys-2026-2.png"; // ✅ Ensure this is in `public` or correct `src/assets` path
-
 
 export default function HeroSection() {
   const { darkMode } = useTheme();
@@ -22,8 +21,9 @@ export default function HeroSection() {
 
   return (
     <section
-      className={`relative min-h-screen overflow-hidden md:px-8  py-5 sm:py-16 transition-colors duration-500 ${darkMode ? "bg-black text-white" : "bg-black text-white"
-        }`}
+      className={`relative min-h-screen overflow-hidden md:px-8  py-5 sm:py-16 transition-colors duration-500 ${
+        darkMode ? "bg-black text-white" : "bg-black text-white"
+      }`}
     >
       <div
         className="relative z-10 sm:pt-32 pt-10 text-left overflow-hidden max-w-6xl mx-auto"
@@ -42,9 +42,10 @@ export default function HeroSection() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.3 }}
-          >Ready to <br />
-            <span className="text-primary">own every </span> <br />
-            conversation?
+          >
+            <span className="font-glancyr">65+</span> years
+            <br /> young, still ahead of{" "}
+            <span className="text-primary">the ad game.</span>
           </motion.h1>
 
           <motion.p
@@ -57,7 +58,8 @@ export default function HeroSection() {
               ...(isDesktop ? { marginLeft: "500px" } : {}),
             }}
           >
-            For six decades & counting, <br />We've set the foundation. <br />Explore the legacy of advertising innovation.
+            Explore everything from Madras roots to modern advertising, disrupt
+            with distinction.
           </motion.p>
         </div>
 
@@ -93,7 +95,8 @@ export default function HeroSection() {
                 transition={{ delay: 0.6, duration: 0.5 }}
                 whileHover={{
                   scale: 1.07,
-                  boxShadow: "0 0 25px rgba(var(--color-primary-rgb, 255,193,7), 0.5)",
+                  boxShadow:
+                    "0 0 25px rgba(var(--color-primary-rgb, 255,193,7), 0.5)",
                 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -108,7 +111,11 @@ export default function HeroSection() {
                     strokeWidth="2.5"
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
                   </svg>
                 </span>
               </motion.button>
