@@ -29,10 +29,11 @@ export default function HomePage() {
       {/* <LegacySection /> */}
       <AdvertisingDNA />
       <CareerDrivenEducation />
+      <WhyJoinUsBanner />
       <WhyAdClubMadras />
       {/* <CommunityBanner /> */}
       {/* <PgdaCard /> */}
-      <WhyJoinUsBanner />
+
       {/* <EventSection /> */}
       <UpcomingEvents />
       <JoinUsBanner />
