@@ -144,7 +144,7 @@ export default function MembershipPage() {
             className="text-base sm:text-lg leading-relaxed"
             variants={fadeUp}
           >
-            With over <strong className="text-primary">1,000+ dynamic voices</strong> and
+            With over <strong className="text-primary">1,000+ dynamic voices {" "}</strong> and
             counting, Ad Club Madras unites every pulse of the advertising
             ecosystem. Be it clients and marketers to agencies, production
             houses, and media, we remain one of India&apos;s oldest and most

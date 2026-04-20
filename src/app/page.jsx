@@ -1,5 +1,6 @@
 import AnimatedBackground from "@/components/background";
 import HeroSection from "@/pages/Home/HeroSection";
+import HeroManifesto from "@/pages/Home/HeroManifesto";
 import LegacySection from "@/pages/Home/LegacySection";
 import AdvertisingDNA from "@/pages/Home/AdvertisingDNA";
 import CareerDrivenEducation from "@/pages/Home/CareerDrivenEducation";
@@ -26,6 +27,7 @@ export default function HomePage() {
     <>
       <AnimatedBackground />
       <HeroSection />
+      <HeroManifesto />
       {/* <LegacySection /> */}
       <AdvertisingDNA />
       <CareerDrivenEducation />
