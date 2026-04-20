@@ -14,7 +14,7 @@ const stats = [
   },
   {
     value: "2024",
-    label: "record entries and India's first MOGO",
+    label: "record entries & India's first MOGO",
   },
 ];
 
@@ -23,76 +23,103 @@ export default function AdvertisingDNA({ layout = "default" }) {
 
   const wrapperClassName = isPanel
     ? ""
-    : "relative overflow-hidden bg-black px-4 py-16 text-white sm:px-8 md:px-16 lg:py-24";
+    : "relative overflow-hidden bg-black px-4 py-20 text-white sm:px-8 md:px-16 lg:py-32";
 
-  const containerClassName = isPanel ? "" : "mx-auto max-w-6xl";
+  const containerClassName = isPanel ? "" : "mx-auto max-w-7xl";
 
   return (
     <section className={wrapperClassName}>
       <div className={containerClassName}>
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.35 }}
-          className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mb-16 flex flex-col justify-between gap-10 md:mb-24 lg:flex-row lg:items-end"
         >
-          <div className="relative min-h-[420px] overflow-hidden rounded-[18px] border border-white/10 bg-primary/80 text-black">
-            <img
-              src="/assets/maddys-2025.PNG"
-              alt="MADDYs Advertising Awards"
-              className="absolute inset-0 h-full w-full object-cover opacity-28 mix-blend-multiply"
-            />
-            <div className="absolute inset-x-0 top-0 flex justify-between p-5 font-asgard text-xs uppercase tracking-[0.24em] text-black/65">
-              <span>Madras</span>
-              <span>Since <span className="font-glancyr">1956</span></span>
-            </div>
-            <div className="relative z-10 flex h-full min-h-[420px] flex-col justify-end p-6 sm:p-8 lg:p-10">
-              <p className="font-asgard text-sm uppercase tracking-[0.28em] text-black/65">
+          <div className="max-w-3xl">
+            <div className="mb-8 flex items-center gap-4">
+              <span className="h-[1px] w-12 bg-primary"></span>
+              <p className="font-asgard text-sm uppercase tracking-[0.24em] text-primary">
                 Advertising DNA
               </p>
-              <h2 className="mt-4 font-asgard text-4xl font-extrabold uppercase leading-tight sm:text-5xl lg:text-6xl">
-                Built for the work that moves culture
-              </h2>
             </div>
+            <h2 className="font-asgard text-2xl font-extrabold uppercase leading-[1.1] sm:text-3xl lg:text-4xl">
+              Built for the work that moves culture
+            </h2>
+          </div>
+          <div className="max-w-lg lg:pb-3">
+            <p className="font-glancyr text-lg leading-relaxed text-white/80">
+              Our creative community in Chennai powers through a{" "}
+              <span className="font-bold text-white">
+                year-round calendar of events
+              </span>
+              , setting the standard globally.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, filter: "blur(10px)" }}
+          whileInView={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="group relative mb-16 h-[60vh] min-h-[400px] w-full overflow-hidden md:mb-24"
+        >
+          <img
+            src="/assets/maddys-2025.PNG"
+            alt="MADDYs Advertising Awards"
+            className="h-full w-full object-cover opacity-80 transition-transform duration-1000 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/30 transition-colors duration-500 group-hover:bg-black/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
+          <div className="absolute inset-x-0 top-0 flex justify-between p-6 font-asgard text-sm uppercase tracking-[0.24em] text-white/90 md:p-10">
+            <span>Madras</span>
+            <span>
+              Since <span className="font-glancyr">1956</span>
+            </span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid gap-16 lg:grid-cols-2 lg:items-start"
+        >
+          <div className="lg:pr-10">
+            <p className="font-glancyr text-xl leading-relaxed text-white/80 md:text-2xl">
+              For over four decades, we&apos;ve{" "}
+              <span className="font-bold text-white">
+                honored excellence through MADDYs
+              </span>
+              , spotlighting the best and inspiring the next generation. In
+              2024, the awards broke records and introduced{" "}
+              <span className="text-primary">
+                India&apos;s first Musical Logo (MOGO)
+              </span>
+              , proving our commitment to innovation.
+            </p>
           </div>
 
-          <div className="flex flex-col justify-between rounded-[18px] border border-white/10 bg-white/[0.04] p-6 shadow-xl sm:p-8 lg:p-10">
-            <p className="font-glancyr text-base leading-8 text-white/82 sm:text-lg">
-              Our advertising and creative community in Chennai powers through a{" "}
-              <span className="font-bold text-primary">
-                year-round calendar of marketing and advertising events
-              </span>{" "}
-              in the city, setting the standard for what&apos;s next globally. For
-              over four decades, we&apos;ve{" "}
-              <span className="font-bold text-primary">
-                honored excellence through MADDYs Advertising Awards
-              </span>
-              , spotlighting the best in the business and inspiring the next
-              generation of talent. In 2024, the{" "}
-              <span className="font-bold text-primary">
-                MADDYs Awards broke records with unprecedented entries and
-                introduced India&apos;s first Musical Logo (MOGO)
-              </span>
-              , proving our commitment to innovation, relevance, and active
-              creative community participation.
-            </p>
-
-            <div className="mt-8 grid gap-0 overflow-hidden rounded-[14px] border border-primary/40 sm:grid-cols-3">
-              {stats.map((item) => (
-                <div
-                  key={item.value}
-                  className="border-b border-primary/35 bg-black p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
-                >
-                  <p className="font-secondary text-2xl font-bold uppercase leading-tight text-primary">
-                    {item.value}
-                  </p>
-                  <p className="mt-2 font-glancyr text-sm leading-5 text-white/72">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="grid gap-10 sm:grid-cols-2">
+            {stats.map((item, index) => (
+              <div key={item.value} className="flex flex-col gap-3">
+                <span className="block font-secondary text-4xl font-bold text-primary md:text-5xl">
+                  {item.value}
+                </span>
+                <span className="relative my-2 block h-[1px] w-full bg-white/20">
+                  <span
+                    className="absolute left-0 top-0 h-full bg-primary transition-all duration-1000"
+                    style={{ width: "40%" }}
+                  ></span>
+                </span>
+                <span className="font-glancyr text-sm uppercase tracking-wider text-white/60">
+                  {item.label}
+                </span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

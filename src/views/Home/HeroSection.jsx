@@ -37,7 +37,7 @@ export default function HeroSection() {
       >
         <div className="relative flex flex-col md:flex-row  justify-start items-start ">
           <motion.h1
-            className="text-3xl sm:text-5xl md:text-7xl px-4 font-asgard uppercase leading-tight tracking-tight"
+            className="text-3xl sm:text-5xl md:text-7xl px-2 font-asgard uppercase leading-tight tracking-tight"
             initial={{ y: 80, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -48,7 +48,7 @@ export default function HeroSection() {
           </motion.h1>
 
           <motion.p
-            className="md:absolute text-xs font-glancyr px-4 md:text-sm mt-10 md:mt-0 md:ml-10 max-w-md justify-end leading-relaxed tracking-tight"
+            className="md:absolute text-xs font-glancyr px-4 md:text-sm mt-8 md:mt-0 md:ml-10 max-w-md justify-end leading-relaxed tracking-tight"
             initial={{ x: 80, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
