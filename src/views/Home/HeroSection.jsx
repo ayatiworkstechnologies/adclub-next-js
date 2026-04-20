@@ -42,14 +42,13 @@ export default function HeroSection() {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.3 }}
-          >
-            A Legacy <br />
-            of <span className="text-primary">Innovation</span> <br />
-            in Advertising
+          >Ready to <br />
+            <span className="text-primary">own every </span> <br />
+            conversation?
           </motion.h1>
 
           <motion.p
-            className="md:absolute text-xs font-glancyr px-4 md:text-sm mt-8 md:mt-0 md:ml-10 max-w-md justify-end leading-relaxed tracking-tight"
+            className="md:absolute text-xs font-glancyr px-4 md:text-sm mt-10 md:mt-0 md:ml-10 max-w-md justify-end leading-relaxed tracking-tight"
             initial={{ x: 80, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
@@ -58,9 +57,7 @@ export default function HeroSection() {
               ...(isDesktop ? { marginLeft: "500px" } : {}),
             }}
           >
-            For over six decades, The Advertising Club Madras has been at the
-            heart of India’s advertising industry — fostering creativity,
-            collaboration, and professional growth.
+            For six decades & counting, <br />We've set the foundation. <br />Explore the legacy of advertising innovation.
           </motion.p>
         </div>
 

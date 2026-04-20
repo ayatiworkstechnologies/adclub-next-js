@@ -26,14 +26,14 @@ export default function HomePage() {
     <>
       <AnimatedBackground />
       <HeroSection />
-      <LegacySection />
+      {/* <LegacySection /> */}
       <AdvertisingDNA />
       <CareerDrivenEducation />
       <WhyAdClubMadras />
       {/* <CommunityBanner /> */}
       {/* <PgdaCard /> */}
       <WhyJoinUsBanner />
-      <EventSection />
+      {/* <EventSection /> */}
       <UpcomingEvents />
       <JoinUsBanner />
       <JoinUsSection />
