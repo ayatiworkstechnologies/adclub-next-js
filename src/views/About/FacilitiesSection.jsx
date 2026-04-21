@@ -97,7 +97,7 @@ export default function FacilitiesSection() {
         >
           <div className="overflow-hidden rounded-[10px]">
             <img
-              src="/assets/hub-space.jpg"
+              src="/assets/home-img-2.png"
               alt="The Hub coworking space"
               className="h-full min-h-[240px] w-full object-cover transition-transform duration-700 hover:scale-105"
             />
