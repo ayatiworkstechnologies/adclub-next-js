@@ -8,24 +8,26 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 const slides = [
   {
     title: "Inspire",
-    subtitle: "Where creativity meets recognition",
+    subtitle:
+      "Where creativity meets recognition and ideas get their spotlight.",
     items: ["MADDYs", "AdTalks", "Deadline", "Sparks"],
     image: "/assets/home-event-1.png",
-    link: "/events/inspire",
+    link: "/events",
   },
   {
     title: "Educate",
-    subtitle: "Where knowledge shapes future-ready talent",
-    items: ["PGDAM", "Workshops", "Mentorship", "Learning"],
+    subtitle:
+      "Where knowledge sharpens careers and learning feels like a creative campaign.",
+    items: ["PGDAM", "Elevate", "Admates"],
     image: "/assets/home-event-2.png",
-    link: "/events/educate",
+    link: "/events",
   },
   {
     title: "Engage",
-    subtitle: "Where communities, brands, and ideas connect",
-    items: ["Networking", "Forums", "Campaigns", "Community"],
+    subtitle: "Where community and creativity collide, and sometimes compete.",
+    items: ["Headline", "Brand & Brew", "Adrenaline"],
     image: "/assets/home-event-3.png",
-    link: "/events/engage",
+    link: "/events",
   },
 ];
 
@@ -120,7 +122,7 @@ export default function WhyAdClubMadras() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   >
-                    <h3 className="font-asgard text-[48px] font-extrabold uppercase leading-none tracking-tighter text-white sm:text-[64px] md:text-[80px] lg:text-[100px]">
+                    <h3 className="font-asgard text-3xl font-extrabold uppercase leading-none tracking-tighter text-white sm:text-3xl md:text-4xl lg:text-5xl">
                       {activeSlide.title}
                     </h3>
 
