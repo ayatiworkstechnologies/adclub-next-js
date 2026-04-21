@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 const bgGraphic = "/assets/hero-fream.svg";
 import { useTheme } from "@/context/ThemeContext";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 const maddyImage = "/maddys-2026-2.png"; // ✅ Ensure this is in `public` or correct `src/assets` path
 
 export default function HeroSection() {
@@ -86,37 +87,17 @@ export default function HeroSection() {
                 MADDYS 2026
               </h2>
               <motion.button
+                whileHover={{ scale: 1.05 }}
                 onClick={() =>
                   window.open("https://maddys2026.adclubmadras.com/", "_blank")
                 }
-                className="group relative overflow-hidden bg-[#e92028] text-white px-6 py-2 sm:px-8 sm:py-3 font-asgard rounded-full text-xs sm:text-sm font-bold uppercase cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                whileHover={{
-                  scale: 1.07,
-                  boxShadow:
-                    "0 0 25px rgba(var(--color-primary-rgb, 255,193,7), 0.5)",
-                }}
-                whileTap={{ scale: 0.95 }}
+                className="flex items-center group w-fit mt-8"
               >
-                {/* Shimmer sweep */}
-                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                <span className="relative z-10 flex items-center gap-2">
-                  Explore More
-                  <svg
-                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
+                <span className="px-6 py-3 text-sm md:text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
+                  EXPLORE MORE
+                </span>
+                <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+                  <ArrowRight className="h-5 w-5" />
                 </span>
               </motion.button>
             </div>

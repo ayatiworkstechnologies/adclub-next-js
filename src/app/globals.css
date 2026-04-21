@@ -10,9 +10,23 @@ body {
 }
 /* tailwind.css or global.css */
 /* global.css or in Tailwind @apply */
-.form-input {
-  @apply w-full px-4 py-2 text-sm rounded-md outline-none border border-gray-300 
-          focus:ring-2 focus:ring-black placeholder-primary text-black;
+@layer components {
+  .heading {
+    @apply font-asgard text-[28px] sm:text-[34px] md:text-[40px] font-extrabold uppercase leading-[1.18] tracking-[-0.02em] text-white;
+  }
+  
+  .sub-heading {
+    @apply font-asgard text-[14px] sm:text-[16px] md:text-[18px] font-extrabold uppercase tracking-[0.05em] text-primary;
+  }
+
+  .text-phara {
+    @apply font-glancyr text-base sm:text-lg md:text-xl leading-[1.9] text-white/90;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-2 text-sm rounded-md outline-none border border-gray-300 
+            focus:ring-2 focus:ring-black placeholder-primary text-black;
+  }
 }
   
 

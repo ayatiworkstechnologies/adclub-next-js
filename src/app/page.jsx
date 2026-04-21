@@ -31,15 +31,17 @@ export default function HomePage() {
       {/* <LegacySection /> */}
       <AdvertisingDNA />
       <CareerDrivenEducation />
-      <WhyJoinUsBanner />
+
       <WhyAdClubMadras />
+      <WhyJoinUsBanner />
+      <JoinUsSection />
       {/* <CommunityBanner /> */}
       {/* <PgdaCard /> */}
 
       {/* <EventSection /> */}
       <UpcomingEvents />
-      <JoinUsBanner />
-      <JoinUsSection />
+      {/* <JoinUsBanner /> */}
+
       <DiscoverMoments />
     </>
   );
