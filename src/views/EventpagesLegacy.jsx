@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { getEventsCategory, getEventsSlug } from "@/api/api";
+import { getEventsCategory, getEventsSlug, getEvents } from "@/api/api";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -93,6 +93,8 @@ export default function EventpagesLegacy() {
   const [activeParentID, setActiveParentID] = useState("inspire");
   const [activeCategoryID, setActiveCategoryID] = useState("all");
   const [slideIndex, setSlideIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const eventsPerPage = 8;
   const navigate = useRouter();
 
   const getDayMonthYear = (dateStr) => {
@@ -138,7 +140,11 @@ export default function EventpagesLegacy() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoriesData = await getEventsCategory();
+        const [categoriesData, allEventsData] = await Promise.all([
+          getEventsCategory(),
+          getEvents(),
+        ]);
+
         const formattedCategories = categoriesData.map((category) => ({
           id: category.id,
           name: category.categoryName,
@@ -148,18 +154,14 @@ export default function EventpagesLegacy() {
 
         setRawCategories(formattedCategories);
 
-        // Load default to first child of 'inspire'
-        const defaultChildren = formattedCategories.filter(
-          (c) => c.parentGroup === "inspire",
+        const sortedEvents = (allEventsData || []).sort(
+          (a, b) =>
+            new Date(b.eventDate || "1970-01-01") -
+            new Date(a.eventDate || "1970-01-01"),
         );
-        if (defaultChildren.length > 0) {
-          loadEventsBySlug(
-            defaultChildren[0].categorySlug,
-            defaultChildren[0].id,
-          );
-        }
+        setEvents(sortedEvents);
       } catch (error) {
-        console.error("Failed to fetch categories", error);
+        console.error("Failed to fetch data", error);
       }
     };
 
@@ -224,7 +226,21 @@ export default function EventpagesLegacy() {
 
   useEffect(() => {
     setFeaturedIndex(0);
-  }, [activeCategoryID]);
+  }, [activeParentID]);
+
+  // Pagination Logic
+  const totalPages = Math.ceil(events.length / eventsPerPage);
+  const startIndex = (currentPage - 1) * eventsPerPage;
+  const paginatedEvents = events.slice(startIndex, startIndex + eventsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    // Scroll to the "UPCOMING EVENTS" heading
+    const element = document.getElementById("upcoming-events-title");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <section className="relative min-h-screen bg-black text-white font-glancyr pt-24 pb-24 overflow-hidden">
@@ -392,35 +408,17 @@ export default function EventpagesLegacy() {
           </div>
         </div>
 
-        {/* Tier 2: Sub-categories (API Mapping) */}
-        <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[10px] sm:text-xs font-bold uppercase font-asgard px-4 mt-6 opacity-90">
-          {rawCategories
-            .filter((c) => c.parentGroup === activeParentID)
-            .map((category, index) => (
-              <button
-                key={category.id ?? `child-${index}`}
-                onClick={() =>
-                  loadEventsBySlug(category.categorySlug, category.id)
-                }
-                className={`transition-all duration-300 rounded-full px-4 py-1.5 whitespace-nowrap tracking-widest ${
-                  activeCategoryID === category.id
-                    ? "border border-primary text-primary"
-                    : "border border-white/10 text-white/50 hover:text-white bg-white/5"
-                }`}
-              >
-                {category.name}
-              </button>
-            ))}
-        </div>
-
         {/* Upcoming Events List */}
         <div className="max-w-[1000px] mx-auto px-5 sm:px-8 md:px-12">
-          <h2 className="text-center text-primary uppercase font-asgard font-extrabold text-[16px] sm:text-[20px] tracking-widest mb-16">
+          <h2
+            id="upcoming-events-title"
+            className="text-center text-primary uppercase font-asgard font-extrabold text-[16px] sm:text-[20px] tracking-widest mb-16"
+          >
             UPCOMING EVENTS
           </h2>
 
           <div className="flex flex-col">
-            {events.map((event) => {
+            {paginatedEvents.map((event) => {
               const { mon, year, day } = getDayMonthYear(event.eventDate);
 
               return (
@@ -446,7 +444,7 @@ export default function EventpagesLegacy() {
 
                     {/* Event Details */}
                     <div className="flex-1 space-y-3">
-                      <h3 className="font-bold text-base sm:text-lg lg:text-[20px] font-glancyr leading-snug">
+                      <h3 className="font-bold text-base sm:text-lg lg:text-[20px] font-glancyr leading-snug text-white">
                         {event.eventTitle}
                       </h3>
                       <div>
@@ -481,6 +479,46 @@ export default function EventpagesLegacy() {
               );
             })}
           </div>
+
+          {/* Pagination UI */}
+          {totalPages > 1 && (
+            <div className="mt-20 flex justify-center items-center gap-4">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => handlePageChange(currentPage - 1)}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-primary hover:text-black hover:border-primary disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white/50 disabled:hover:border-white/20 transition-all duration-300"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {[...Array(totalPages)].map((_, i) => {
+                  const pageNum = i + 1;
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => handlePageChange(pageNum)}
+                      className={`w-10 h-10 rounded-full text-xs font-bold font-glancyr transition-all duration-300 ${
+                        currentPage === pageNum
+                          ? "bg-primary text-black"
+                          : "text-white/50 hover:text-white"
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => handlePageChange(currentPage + 1)}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:bg-primary hover:text-black hover:border-primary disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-white/50 disabled:hover:border-white/20 transition-all duration-300"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
