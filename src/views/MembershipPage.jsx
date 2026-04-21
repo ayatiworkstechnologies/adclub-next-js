@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -64,170 +64,217 @@ export default function MembershipPage() {
   };
 
   return (
-    <motion.div
-      className="min-h-screen bg-black text-white pt-28 px-4 mt-10 md:px-12 pb-12 font-glancyr"
-      initial="hidden"
-      animate="visible"
-      variants={{
-        visible: {
-          transition: {
-            staggerChildren: 0.2,
+    <div className="min-h-screen bg-black text-white pt-24 pb-16 font-glancyr relative overflow-hidden">
+      {/* Grid Background Overlay for Hero part */}
+      <div className="absolute inset-0 top-0 h-[600px] pointer-events-none opacity-[0.15] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:linear-gradient(to_bottom,black_20%,transparent_100%)]"></div>
+
+      <motion.div
+        className="max-w-7xl mx-auto px-5 sm:px-8 md:px-12 relative z-10"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.1,
+            },
           },
-        },
-      }}
-    >
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
-        <motion.aside className="md:col-span-1 space-y-8" variants={fadeUp}>
-          <h2 className="text-4xl font-bold text-primary uppercase font-asgard leading-tight">
-            Step In To Disrupt With Distinction
+        }}
+      >
+        {/* Top Hero Section */}
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 pt-16 md:pt-24 pb-20">
+          <motion.div variants={fadeUp} className="space-y-6">
+            <h1 className="text-4xl sm:text-5xl md:text-[56px] font-extrabold uppercase font-asgard leading-[1.1] tracking-tight">
+              DISRUPT{" "}
+              <span className="text-primary">
+                WITH
+                <br />
+                DISTINCTION
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl font-bold text-white italic">
+              Become a member, today!
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="space-y-6 text-sm sm:text-[15px] leading-[1.8] text-white/80 max-w-lg"
+          >
+            <p>
+              With over{" "}
+              <strong className="text-white">1,000+ dynamic voices</strong> and
+              counting, Ad Club Madras unites every pulse of the advertising
+              ecosystem. Be it clients and marketers to agencies, production
+              houses, and media, we remain one of India&apos;s oldest and most
+              influential creative institutions.
+            </p>
+            <p>
+              For nearly seven decades, we&apos;ve been the epicenter of
+              innovative disruption, the hub where advertising, media, and
+              marketing professionals, students, and visionaries converge to
+              shape the future of the craft.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Why Become a Member Section */}
+        <motion.div variants={fadeUp} className="py-16">
+          <h2 className="text-2xl sm:text-[28px] font-extrabold uppercase font-asgard mb-10 tracking-[0.02em]">
+            <span className="text-primary">WHY</span> BECOME A MEMBER?
           </h2>
 
-          <p className="text-base sm:text-lg text-white/85 font-glancyr">
-            Become a member, today!
-          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1 */}
+            <div className="bg-white/5 border border-white/10 rounded-[10px] p-6 hover:bg-white/10 transition duration-300">
+              <h3 className="text-lg font-bold mb-4 font-asgard tracking-wide">
+                Connect &amp; <span className="text-primary">Collaborate</span>
+              </h3>
+              <p className="text-xs sm:text-[13.5px] leading-[1.8] text-white/70">
+                Meet, mingle, and exchange ideas with advertising, media, and
+                creative professionals who drive the industry forward.
+              </p>
+            </div>
+            {/* Card 2 */}
+            <div className="bg-white/5 border border-white/10 rounded-[10px] p-6 hover:bg-white/10 transition duration-300">
+              <h3 className="text-lg font-bold mb-4 font-asgard tracking-wide">
+                Learn &amp; <span className="text-primary">Lead</span>
+              </h3>
+              <p className="text-xs sm:text-[13.5px] leading-[1.8] text-white/70">
+                Level up your skills through workshops, seminars, and
+                masterclasses led by industry leaders who&apos;ve been there,
+                done that.
+              </p>
+            </div>
+            {/* Card 3 */}
+            <div className="bg-white/5 border border-white/10 rounded-[10px] p-6 hover:bg-white/10 transition duration-300">
+              <h3 className="text-lg font-bold mb-4 font-asgard tracking-wide">
+                Gain <span className="text-primary">Exposure</span>
+              </h3>
+              <p className="text-xs sm:text-[13.5px] leading-[1.8] text-white/70">
+                Access to top speakers and thought leaders from advertising,
+                media, communications, PR, and beyond.
+              </p>
+            </div>
+            {/* Card 4 */}
+            <div className="bg-white/5 border border-white/10 rounded-[10px] p-6 hover:bg-white/10 transition duration-300">
+              <h3 className="text-lg font-bold mb-4 font-asgard tracking-wide">
+                Exclusive <span className="text-primary">Access</span>
+              </h3>
+              <p className="text-xs sm:text-[13.5px] leading-[1.8] text-white/70">
+                Enjoy free or discounted entry to Ad Club events, seminars, and
+                signature programs that keep you plugged into what&apos;s next.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 text-sm sm:text-[15px] leading-[1.8] text-white/70 italic max-w-5xl">
+            &ldquo;Membership isn&apos;t just about access, it&apos;s about
+            belonging. It&apos;s about securing your place in Chennai&apos;s
+            advertising story, joining a dynamic community of creative
+            professionals, and positioning yourself at the heart of innovation,
+            collaboration, and recognition.&rdquo;
+          </div>
+        </motion.div>
+
+        {/* Pricing Section */}
+        <motion.div
+          variants={fadeUp}
+          className="py-16 mt-8 text-center max-w-4xl mx-auto"
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold uppercase font-asgard mb-12 tracking-wide">
+            ANNUAL MEMBERSHIP{" "}
+            <span className="text-primary">FEES (APRIL – MARCH)</span>
+          </h2>
+
+          <div className="space-y-6 text-[13px] sm:text-[15px] font-bold tracking-wider">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 border-b border-white/10 pb-5">
+              <span className="font-asgard uppercase">CORPORATE MEMBERSHIP:</span>
+              <span className="font-glancyr text-[15px] sm:text-[17px] tracking-normal">
+                ₹{fees.corporate.toLocaleString()} + {fees.GST}% GST ={" "}
+                <span className="text-primary">
+                  ₹{priceWithGST(fees.corporate).toLocaleString()}
+                </span>
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 border-b border-white/10 pb-5">
+              <span className="font-asgard uppercase">INDIVIDUAL MEMBERSHIP:</span>
+              <span className="font-glancyr text-[15px] sm:text-[17px] tracking-normal">
+                ₹{fees.individual.toLocaleString()} + {fees.GST}% GST ={" "}
+                <span className="text-primary">
+                  ₹{priceWithGST(fees.individual).toLocaleString()}
+                </span>
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 border-b border-white/10 pb-5">
+              <span className="font-asgard uppercase">STUDENT MEMBERSHIP:</span>
+              <span className="font-glancyr text-[15px] sm:text-[17px] tracking-normal">
+                ₹{fees.student.toLocaleString()} + {fees.GST}% GST ={" "}
+                <span className="text-primary">
+                  ₹{priceWithGST(fees.student).toLocaleString()}
+                </span>
+              </span>
+            </div>
+          </div>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
-            type="button"
             onClick={() =>
-              navigate.push(isAuthenticated ? "/membership-application" : "/login")
+              navigate.push(
+                isAuthenticated ? "/membership-application" : "/login",
+              )
             }
-            className="flex items-center group w-fit"
+            className="flex items-center group w-fit mx-auto mt-14"
           >
-            <span className="px-6 py-3 text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
-            Join Advertising Club Madras
+            <span className="px-6 py-3 text-sm md:text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300 block">
+              JOIN NOW
             </span>
-            <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center">
+            <span className="px-4 py-3 bg-white hover:bg-primary text-black rounded-full group-hover:bg-primary group-hover:text-black transition duration-300 flex items-center justify-center ml-[2px]">
               <ArrowRight className="h-5 w-5" />
             </span>
           </motion.button>
+        </motion.div>
 
-          <div className="bg-gray-800 p-5 rounded-lg shadow-md">
-            <h3 className="font-semibold text-white mb-4">Offline Application</h3>
-
-            <div className="space-y-3">
+        {/* Offline Forms Section */}
+        {(files.uploadMembershipRegForm ||
+          files.uploadMembershipRenewalForm) && (
+          <motion.div
+            variants={fadeUp}
+            className="py-8 mt-10 border-t border-white/10 text-center"
+          >
+            <p className="text-xs sm:text-sm text-white/50 mb-6 font-asgard uppercase tracking-widest">
+              Prefer to apply offline?
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               {files.uploadMembershipRegForm && (
-                <div className="flex items-center gap-2">
-                  <Download className="w-4 h-4 text-primary" />
-                  <a
-                    href={files.uploadMembershipRegForm}
-                    download
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:underline text-sm text-primary"
-                  >
-                    Application for Membership
-                  </a>
-                </div>
+                <a
+                  href={files.uploadMembershipRegForm}
+                  download
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-sm text-primary hover:underline font-bold"
+                >
+                  <Download className="w-4 h-4" />
+                  Application for Membership
+                </a>
               )}
-
               {files.uploadMembershipRenewalForm && (
-                <div className="flex items-center gap-2">
-                  <Download className="w-4 h-4 text-primary" />
-                  <a
-                    href={files.uploadMembershipRenewalForm}
-                    download
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:underline text-sm text-primary"
-                  >
-                    Application for Membership Renewal
-                  </a>
-                </div>
+                <a
+                  href={files.uploadMembershipRenewalForm}
+                  download
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-sm text-primary hover:underline font-bold"
+                >
+                  <Download className="w-4 h-4" />
+                  Application for Membership Renewal
+                </a>
               )}
             </div>
-          </div>
-        </motion.aside>
-
-        <motion.main className="md:col-span-2 space-y-10" variants={fadeUp}>
-          <motion.p
-            className="text-base sm:text-lg leading-relaxed"
-            variants={fadeUp}
-          >
-            With over <strong className="text-primary">1,000+ dynamic voices {" "}</strong> and
-            counting, Ad Club Madras unites every pulse of the advertising
-            ecosystem. Be it clients and marketers to agencies, production
-            houses, and media, we remain one of India&apos;s oldest and most
-            influential creative institutions.
-          </motion.p>
-
-          <motion.p
-            className="text-base sm:text-lg leading-relaxed text-white/85"
-            variants={fadeUp}
-          >
-            For nearly seven decades, we&apos;ve been the epicenter of innovative
-            disruption, the hub where advertising, media, and marketing
-            professionals, students, and visionaries converge to shape the
-            future of the craft.
-          </motion.p>
-
-          <motion.div variants={fadeUp}>
-            <h3 className="text-xl font-bold mb-3 text-primary font-asgard">
-              Why Become a Member?
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 text-sm sm:text-base text-gray-300">
-              <li>
-                <strong className="text-white">Connect &amp; Collaborate:</strong> Meet,
-                mingle, and exchange ideas with advertising, media, and creative
-                professionals who drive the industry forward.
-              </li>
-              <li>
-                <strong className="text-white">Learn &amp; Lead:</strong> Level up your
-                skills through workshops, seminars, and masterclasses led by
-                industry leaders who&apos;ve been there, done that.
-              </li>
-              <li>
-                <strong className="text-white">Gain Exposure:</strong> Access to top
-                speakers and thought leaders from advertising, media,
-                communications, PR, and beyond.
-              </li>
-              <li>
-                <strong className="text-white">Exclusive Access:</strong> Enjoy free or
-                discounted entry to Ad Club events, seminars, and signature
-                programs that keep you plugged into what&apos;s next.
-              </li>
-            </ul>
           </motion.div>
-
-          <motion.p
-            className="text-base sm:text-lg leading-relaxed text-white/85"
-            variants={fadeUp}
-          >
-            Membership isn&apos;t just about access, it&apos;s about belonging. It&apos;s
-            about securing your place in Chennai&apos;s advertising story, joining a
-            dynamic community of creative professionals, and positioning yourself
-            at the heart of innovation, collaboration, and recognition.
-          </motion.p>
-
-          <motion.div variants={fadeUp}>
-            <h3 className="text-xl font-bold mb-3 text-primary font-asgard">
-              Annual Membership Fees (April – March)
-            </h3>
-            <ul className="list-disc pl-6 space-y-2 text-sm sm:text-base text-gray-300">
-              <li>
-                Corporate Membership: ₹6,000 + 18% GST = ₹7,080
-              </li>
-
-              <li>
-                Individual Membership: ₹2,500 + 18% GST = ₹2,950
-              </li>
-
-              <li>
-                Student Membership: ₹1,000 + 18% GST = ₹1,180
-              </li>
-            </ul>
-          </motion.div>
-
-          <motion.p
-            className="text-sm sm:text-base leading-relaxed text-white/90"
-            variants={fadeUp}
-          >
-            Step into a legacy of excellence. Elevate your career. Connect with
-            the community that defines what&apos;s next in the advertising industry
-            of India.
-          </motion.p>
-        </motion.main>
-      </div>
-    </motion.div>
+        )}
+      </motion.div>
+    </div>
   );
 }

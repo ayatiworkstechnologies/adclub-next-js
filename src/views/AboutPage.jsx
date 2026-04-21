@@ -33,132 +33,131 @@ export default function AboutPage() {
 
   return (
     <>
+      <section
+        className={`relative min-h-screen px-4 sm:px-6 md:px-20 py-24 transition-colors duration-500 overflow-hidden ${sectionBg}`}
+      >
+        <div className="container mx-auto">
+          {/* 🔘 Tabs */}
+          <div
+            className="flex flex-wrap justify-center gap-8 mb-10 text-base font-asgard font-medium"
+            role="tablist"
+          >
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                role="tab"
+                aria-selected={activeTab === tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className="relative w-40 h-16 flex items-center justify-center text-center rounded-lg overflow-hidden transition-all duration-300"
+              >
+                {/* 🌀 Lottie animation only for active tab */}
+                {activeTab === tab.id && (
+                  <div className="absolute inset-0 z-0 scale-110 pointer-events-none">
+                    <DotLottieReact
+                      src="/circleanime.lottie"
+                      loop
+                      autoplay
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
+                )}
 
-       <section
-      className={`relative min-h-screen px-4 sm:px-6 md:px-20 py-24 transition-colors duration-500 overflow-hidden ${sectionBg}`}
-    >
-      <div className="container mx-auto">
-        {/* 🔘 Tabs */}
-        <div
-          className="flex flex-wrap justify-center gap-8 mb-10 text-base font-asgard font-medium"
-          role="tablist"
-        >
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              role="tab"
-              aria-selected={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className="relative w-40 h-16 flex items-center justify-center text-center rounded-lg overflow-hidden transition-all duration-300"
-            >
-              {/* 🌀 Lottie animation only for active tab */}
-              {activeTab === tab.id && (
-                <div className="absolute inset-0 z-0 scale-110 pointer-events-none">
-                  <DotLottieReact
-                    src="/circleanime.lottie"
-                    loop
-                    autoplay
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                </div>
+                <span
+                  className={`relative z-10 px-4 py-2 transition-all duration-300 ${
+                    activeTab === tab.id
+                      ? "text-primary font-bold scale-105"
+                      : "text-white hover:text-primary"
+                  }`}
+                >
+                  {tab.label}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* 🔘 Tab Content */}
+          <div className="max-w-6xl mx-auto text-center px-2 sm:px-4 md:px-6">
+            <AnimatePresence mode="wait">
+              {activeTab === "about" && (
+                <motion.div
+                  key="about"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeVariants}
+                >
+                  <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
+                    About
+                  </h2>
+                  <AboutBanner />
+                  <AboutCircle />
+                  <AboutTimeLine />
+                </motion.div>
               )}
 
-              <span
-                className={`relative z-10 px-4 py-2 transition-all duration-300 ${
-                  activeTab === tab.id
-                    ? "text-primary font-bold scale-105"
-                    : "text-white hover:text-primary"
-                }`}
-              >
-                {tab.label}
-              </span>
-            </button>
-          ))}
+              {activeTab === "past" && (
+                <motion.div
+                  key="past"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeVariants}
+                >
+                  <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
+                    Past Presidents
+                  </h2>
+                  <PastPresidentsGrid />
+                </motion.div>
+              )}
+
+              {activeTab === "executive" && (
+                <motion.div
+                  key="executive"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeVariants}
+                >
+                  <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
+                    Executive Committee
+                  </h2>
+                  <TimelineComponent />
+                </motion.div>
+              )}
+
+              {activeTab === "facilities" && (
+                <motion.div
+                  key="facilities"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeVariants}
+                >
+                  <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
+                    Our Facilities
+                  </h2>
+                  <FacilitiesSection className="text-left" />
+                </motion.div>
+              )}
+
+              {activeTab === "journey" && (
+                <motion.div
+                  key="journey"
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  variants={fadeVariants}
+                >
+                  <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
+                    Legendary Journey
+                  </h2>
+                  <LegendaryJourney />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
-
-        {/* 🔘 Tab Content */}
-        <div className="max-w-6xl mx-auto text-center px-2 sm:px-4 md:px-6">
-          <AnimatePresence mode="wait">
-            {activeTab === "about" && (
-              <motion.div
-                key="about"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={fadeVariants}
-              >
-                <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
-                  About
-                </h2>
-                <AboutBanner />
-                <AboutCircle />
-                <AboutTimeLine />
-              </motion.div>
-            )}
-
-            {activeTab === "past" && (
-              <motion.div
-                key="past"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={fadeVariants}
-              >
-                <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
-                  Past Presidents
-                </h2>
-                <PastPresidentsGrid />
-              </motion.div>
-            )}
-
-            {activeTab === "executive" && (
-              <motion.div
-                key="executive"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={fadeVariants}
-              >
-                <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
-                  Executive Committee
-                </h2>
-                <TimelineComponent />
-              </motion.div>
-            )}
-
-            {activeTab === "facilities" && (
-              <motion.div
-                key="facilities"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={fadeVariants}
-              >
-                <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
-                  Our Facilities
-                </h2>
-                <FacilitiesSection />
-              </motion.div>
-            )}
-
-            {activeTab === "journey" && (
-              <motion.div
-                key="journey"
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                variants={fadeVariants}
-              >
-                <h2 className="text-xl sm:text-2xl uppercase font-bold font-asgard mb-4">
-                  Legendary Journey
-                </h2>
-                <LegendaryJourney />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </section></>
-   
+      </section>
+    </>
   );
 }

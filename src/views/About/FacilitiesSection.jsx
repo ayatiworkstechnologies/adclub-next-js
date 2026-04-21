@@ -1,223 +1,269 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Briefcase,
-  Users,
-  ClipboardList,
-  Presentation,
-  FileText,
-  UsersRound,
-  Mic,
-  Sliders,
-  Phone,
-  Mail,
-  CheckCircle2,
-} from "lucide-react";
+import { CheckCircle2, Phone, Mail } from "lucide-react";
 
 const facilities = [
-  { icon: <Users className="h-5 w-5" />, label: "Briefing Sessions" },
-  { icon: <Briefcase className="h-5 w-5" />, label: "Business Pitches" },
-  { icon: <ClipboardList className="h-5 w-5" />, label: "Client Meetings" },
-  { icon: <FileText className="h-5 w-5" />, label: "Forums" },
-  { icon: <Presentation className="h-5 w-5" />, label: "Sales Meets" },
-  { icon: <UsersRound className="h-5 w-5" />, label: "Presentations" },
-  { icon: <Mic className="h-5 w-5" />, label: "Seminars" },
-  { icon: <Sliders className="h-5 w-5" />, label: "Workshops & More" },
+  "Open Discussions & Business Pitches",
+  "Client Meetings Forums",
+  "Delegate & Staff Presentations",
+  "Seminars | Workshops | More",
 ];
 
 const tariffRows = [
-  { day: "Monday–Friday (Full Day)", member: "3,250", nonMember: "4,250" },
-  { day: "Saturday (Full Day)", member: "3,750", nonMember: "4,750" },
-  { day: "Sunday & Public Holidays", member: "4,250", nonMember: "5,250" },
-  { day: "Projector Charges", member: "750", nonMember: "1,250" },
+  {
+    day: "Monday–Friday (Full Day)",
+    member: "₹3,250 + GST",
+    nonMember: "₹4,250 + GST",
+  },
+  {
+    day: "Saturday (Full Day)",
+    member: "₹3,750 + GST",
+    nonMember: "₹4,750 + GST",
+  },
+  {
+    day: "Sunday & Public Holidays",
+    member: "₹4,250 + GST",
+    nonMember: "₹5,250 + GST",
+  },
+  {
+    day: "Projector Charges",
+    member: "₹750 + GST",
+    nonMember: "₹1,250 + GST",
+  },
 ];
 
 const bookingNotes = [
-  "Full Day Timing: 9:30 AM to 5:30 PM",
-  "Half Day Pricing: 60% of full-day rates",
-  "GST @18% applicable",
-  "Advance payment required for booking",
-  "Alcohol is strictly prohibited on premises",
+  "Full-day booking timing: 9:30 AM to 5:30 PM",
+  "Half-day booking is charged at 60% of the full-day tariff",
+  "Advance payment is required to confirm booking",
+  "Alcohol is strictly prohibited on the premises",
 ];
 
 export default function FacilitiesSection() {
   return (
-    <section className="min-h-screen bg-black px-6 py-12 text-white sm:px-10">
-      <div className="mx-auto max-w-6xl space-y-10">
+    <section className="bg-black px-4 py-12 text-white text-left sm:px-6 md:px-10 lg:px-16 lg:py-16">
+      <div className="mx-auto max-w-6xl">
+        {/* Top Intro */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-5"
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14"
         >
-          <h2 className="font-asgard text-2xl font-extrabold uppercase leading-tight text-primary sm:text-4xl">
-            The Hub: Where Visionaries Converge & Possibilities Multiply.
-          </h2>
+          <div>
+            <h2 className="font-asgard text-[28px] font-extrabold uppercase leading-[1.08] tracking-[-0.03em] text-white sm:text-[34px] md:text-[42px]">
+              <span className="text-primary">The Hub:</span> Where
+              <br />
+              Visionaries
+              <br />
+              Converge &
+              <br />
+              Possibilities
+              <br />
+              Multiply.
+            </h2>
+          </div>
 
-          <p className="font-glancyr text-sm leading-8 text-white/85 sm:text-base">
-            Welcome to The HUB, a dynamic coworking space in T.Nagar that blends the heritage of Advertising Club
-            Madras with the pulse of modern enterprise. Designed for thinkers, creators, and changemakers, The HUB is
-            more than just a venue — it&apos;s a launchpad for ideas, collaboration, and growth.
-          </p>
+          <div className="space-y-4">
+            <p className="font-glancyr text-[12px] leading-[1.9] text-white/68 sm:text-[12.5px] md:text-[13px]">
+              Welcome to The HUB, a dynamic coworking space in T. Nagar that
+              blends the legacy of Ad Club Madras with the pulse of modern
+              enterprise. Designed for thinkers, creators, and changemakers,
+              this is more than just a venue — it is a launchpad for ideas,
+              collaboration, and growth.
+            </p>
 
-          <p className="font-glancyr text-sm leading-8 text-white/85 sm:text-base">
-            Whether you&apos;re hosting a high-stakes business pitch, a client presentation, a creative workshop, or a
-            strategic seminar, our space adapts to your ambition. With over 65 years of legacy in nurturing
-            advertising excellence, we now open our doors to a new generation of professionals seeking an affordable
-            coworking space in Chennai that&apos;s both inspiring and inclusive.
-          </p>
+            <p className="font-glancyr text-[12px] leading-[1.9] text-white/68 sm:text-[12.5px] md:text-[13px]">
+              Whether you are hosting a business pitch, a client presentation, a
+              strategic seminar, or a creative workshop, the space adapts to
+              your ambition. With a longstanding heritage of nurturing
+              advertising excellence, The HUB now opens its doors to a new
+              generation of professionals seeking an inspiring and accessible
+              coworking space in Chennai.
+            </p>
+          </div>
         </motion.div>
 
+        {/* Image + Why Choose */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-white/15 bg-white/[0.03] p-6 text-left"
+          transition={{ duration: 0.75, delay: 0.05, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-10 grid gap-4 md:grid-cols-[0.82fr_1.18fr]"
         >
-          <h3 className="font-asgard text-xl font-bold uppercase text-primary sm:text-2xl">Why Choose The HUB?</h3>
-          <ul className="mt-4 space-y-3 font-glancyr text-sm leading-7 text-white/88 sm:text-base">
-            <li>
-              <div className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
-                <span>
-                  <strong className="text-white">Legacy with Vision:</strong> Backed by one of India&apos;s oldest
-                  advertising clubs, The HUB is rooted in credibility and driven by innovation.
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
-                <span>
-                  <strong className="text-white">Inclusive & Evolved:</strong> Open to members and non-members alike,
-                  our space welcomes diverse voices and ideas.
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
-                <span>
-                  <strong className="text-white">Dynamic Programming:</strong> From speaker series and debates to award
-                  shows and networking events, The HUB is always buzzing.
-                </span>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-start gap-3">
-                <span className="mt-2 h-2 w-2 rounded-full bg-primary" />
-                <span>
-                  <strong className="text-white">Affordable Excellence:</strong> A premium coworking space in T.Nagar
-                  without the premium price tag — ideal for startups, freelancers, and established teams alike.
-                </span>
-              </div>
-            </li>
-          </ul>
+          <div className="overflow-hidden rounded-[10px]">
+            <img
+              src="/assets/hub-space.jpg"
+              alt="The Hub coworking space"
+              className="h-full min-h-[240px] w-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          <div className="rounded-[10px] border border-white/10 bg-[#0a0a0a] p-5 sm:p-6 md:p-7">
+            <h3 className="font-asgard text-[18px] font-extrabold uppercase tracking-[0.04em] text-primary sm:text-[20px]">
+              Why Choose The Hub?
+            </h3>
+
+            <div className="mt-5 space-y-4">
+              {[
+                "Legacy with vision — backed by one of India’s earliest and most respected advertising communities.",
+                "Inclusive & evolved — open to both members and non-members, encouraging wider collaboration.",
+                "Dynamic programming — ideal for talks, debates, presentations, meetings, and industry networking.",
+                "Affordable excellence — a premium-feel venue in T. Nagar without the premium rental barrier.",
+              ].map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <span className="mt-[7px] h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <p className="font-glancyr text-[12px] leading-[1.9] text-white/68 sm:text-[12.5px] md:text-[13px]">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
+        {/* Facilities */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-6"
+          transition={{ duration: 0.7, delay: 0.06, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-12"
         >
-          <h3 className="font-asgard text-xl font-bold uppercase text-primary sm:text-2xl">Facilities That Empower</h3>
-          <p className="font-glancyr text-sm leading-8 text-white/85 sm:text-base">
-            The HUB (coworking space) offers a thoughtfully curated environment for:
+          <h3 className="font-asgard text-[16px] font-extrabold uppercase tracking-[0.05em] text-primary sm:text-[18px]">
+            Facilities That Empower
+          </h3>
+
+          <p className="font-glancyr mt-3 text-[12px] leading-[1.9] text-white/65 sm:text-[12.5px] md:text-[13px]">
+            The HUB coworking space offers a thoughtfully curated environment
+            for:
           </p>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-5 space-y-4">
             {facilities.map((item) => (
               <div
-                key={item.label}
-                className="rounded-xl border border-primary/25 bg-primary/10 p-4 text-white"
+                key={item}
+                className="font-asgard border-b border-white/10 pb-3 text-[12px] font-semibold uppercase tracking-[0.05em] text-white/88 sm:text-[12.5px] md:text-[13px]"
               >
-                <div className="mb-2 text-primary">{item.icon}</div>
-                <p className="font-asgard text-sm font-bold uppercase leading-6">{item.label}</p>
+                <span className="text-primary">{item.split(" | ")[0]}</span>
+                {item.includes("|") && (
+                  <span className="text-white/88">
+                    {" "}
+                    | {item.split(" | ")[1]}
+                  </span>
+                )}
+                {!item.includes("|") && item}
               </div>
             ))}
           </div>
         </motion.div>
 
+        {/* Tariff */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-5"
+          transition={{ duration: 0.7, delay: 0.08, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-12"
         >
-          <h3 className="font-asgard text-xl font-bold uppercase text-primary sm:text-2xl">
+          <h3 className="font-asgard text-[16px] font-extrabold uppercase tracking-[0.05em] text-primary sm:text-[18px]">
             Venue Tariff & Booking Details
           </h3>
 
-          <div className="overflow-x-auto rounded-xl border border-primary/50">
-            <table className="w-full min-w-[640px] text-left text-sm font-glancyr sm:text-base">
-              <thead className="bg-primary text-black">
-                <tr>
-                  <th className="px-4 py-3 font-asgard uppercase">Day</th>
-                  <th className="px-4 py-3 font-asgard uppercase">Member (₹)</th>
-                  <th className="px-4 py-3 font-asgard uppercase">Non-Member (₹)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tariffRows.map((row) => (
-                  <tr key={row.day} className="border-t border-white/15">
-                    <td className="px-4 py-3">{row.day}</td>
-                    <td className="px-4 py-3">{row.member}</td>
-                    <td className="px-4 py-3">{row.nonMember}</td>
+          <div className="mt-5 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="overflow-hidden rounded-[10px] border border-white/10">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-white/10 bg-white/[0.03]">
+                    <th className="px-4 py-3 text-[11px] font-extrabold uppercase tracking-[0.08em] text-primary">
+                      Day
+                    </th>
+                    <th className="px-4 py-3 text-[11px] font-extrabold uppercase tracking-[0.08em] text-primary">
+                      Member
+                    </th>
+                    <th className="px-4 py-3 text-[11px] font-extrabold uppercase tracking-[0.08em] text-primary">
+                      Non-Member
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {tariffRows.map((row, index) => (
+                    <tr
+                      key={row.day}
+                      className={`border-b border-white/10 ${
+                        index % 2 === 0 ? "bg-transparent" : "bg-white/[0.02]"
+                      }`}
+                    >
+                      <td className="font-glancyr px-4 py-3 text-[12px] leading-[1.7] text-white/82">
+                        {row.day}
+                      </td>
+                      <td className="font-glancyr px-4 py-3 text-[12px] font-semibold leading-[1.7] text-primary">
+                        {row.member}
+                      </td>
+                      <td className="font-glancyr px-4 py-3 text-[12px] font-semibold leading-[1.7] text-white/60">
+                        {row.nonMember}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            {bookingNotes.map((note) => (
-              <div
-                key={note}
-                className="flex items-start gap-3 rounded-lg border border-white/15 bg-white/[0.02] p-3 text-left"
-              >
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <p className="font-glancyr text-sm leading-6 text-white/88 sm:text-base">
-                  {note}
-                </p>
-              </div>
-            ))}
+            <div className="space-y-3">
+              {bookingNotes.map((note) => (
+                <div
+                  key={note}
+                  className="flex items-start gap-3 rounded-[10px] border border-white/8 bg-[#0a0a0a] px-4 py-3"
+                >
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <p className="font-glancyr text-[12px] leading-[1.8] text-white/68 sm:text-[12.5px]">
+                    {note}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
+        {/* Contact */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-white/15 bg-white/[0.03] p-6"
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="mt-12"
         >
-          <h3 className="font-asgard text-xl font-bold uppercase text-primary sm:text-2xl">Contact Details</h3>
+          <h3 className="font-asgard text-[16px] font-extrabold uppercase tracking-[0.05em] text-primary sm:text-[18px]">
+            Contact Details
+          </h3>
 
-          <div className="mt-4 space-y-3 font-glancyr text-sm text-white/88 sm:text-base">
-            <p className="flex items-center gap-2">
+          <div className="mt-5 space-y-3">
+            <div className="flex items-center gap-3 font-glancyr text-[12px] text-white/80 sm:text-[13px]">
               <Phone className="h-4 w-4 text-primary" />
-              <a href="tel:8248717152" className="hover:underline">8248717152</a>
-              <span>/</span>
-              <a href="tel:04442694778" className="hover:underline">044-42694778</a>
-            </p>
-            <p className="flex items-center gap-2">
+              <a href="tel:8248717152" className="hover:text-primary">
+                8248717152
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3 font-glancyr text-[12px] text-white/80 sm:text-[13px]">
               <Mail className="h-4 w-4 text-primary" />
-              <a href="mailto:admin@adclubmadras.com" className="hover:underline">
+              <a
+                href="mailto:admin@adclubmadras.com"
+                className="hover:text-primary"
+              >
                 admin@adclubmadras.com
               </a>
-            </p>
+            </div>
           </div>
 
-          <p className="mt-6 font-glancyr text-sm leading-8 text-white/85 sm:text-base">
-            Discover a coworking experience that&apos;s as ambitious as you are. Book The HUB today and be part of a
-            community that celebrates creativity, connection, and continuous evolution.
+          <p className="font-glancyr mt-5 max-w-4xl text-[12px] leading-[1.9] text-white/62 sm:text-[12.5px] md:text-[13px]">
+            Discover a coworking experience that is as ambitious as you are.
+            Book The HUB and be part of a community that celebrates creativity,
+            connection, and continuous evolution.
           </p>
         </motion.div>
       </div>

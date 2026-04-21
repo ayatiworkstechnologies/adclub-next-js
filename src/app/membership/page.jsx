@@ -1,4 +1,4 @@
-import PageComponent from "@/pages/MembershipPage";
+import MembershipPage from "@/pages/MembershipPage";
 import { createPageMetadata } from "../seo";
 
 export const metadata = createPageMetadata({
@@ -9,5 +9,5 @@ export const metadata = createPageMetadata({
 });
 
 export default function Page() {
-  return <PageComponent />;
+  return <MembershipPage />;
 }

@@ -1,30 +1,30 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
   {
     title: "Inspire",
     subtitle: "Where creativity meets recognition",
     items: ["MADDYs", "AdTalks", "Deadline", "Sparks"],
-    image: "/assets/Events.png",
+    image: "/assets/home-event-1.png",
     link: "/events/inspire",
   },
   {
     title: "Educate",
     subtitle: "Where knowledge shapes future-ready talent",
     items: ["PGDAM", "Workshops", "Mentorship", "Learning"],
-    image: "/assets/pgda-banner.jpg",
+    image: "/assets/home-event-2.png",
     link: "/events/educate",
   },
   {
     title: "Engage",
     subtitle: "Where communities, brands, and ideas connect",
     items: ["Networking", "Forums", "Campaigns", "Community"],
-    image: "/assets/eventbanner3.jpg",
+    image: "/assets/home-event-3.png",
     link: "/events/engage",
   },
 ];
@@ -33,13 +33,18 @@ export default function WhyAdClubMadras() {
   const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % slides.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
+  const goNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % slides.length);
   }, []);
+
+  const goPrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(goNext, 7000);
+    return () => clearInterval(interval);
+  }, [goNext]);
 
   const activeSlide = slides[activeIndex];
 
@@ -67,9 +72,11 @@ export default function WhyAdClubMadras() {
             in Chennai, where creativity thrives, careers accelerate, and bold
             ideas find their stage. For decades, Ad Club Madras has been the
             place where the industry&apos;s brightest minds come together to{" "}
-            <span className="font-bold text-white">inspire, educate, and engage.</span> This
-            is more than a calendar of events; it&apos;s a movement that keeps
-            the pulse of advertising alive and future-ready.
+            <span className="font-bold text-white">
+              inspire, educate, and engage.
+            </span>{" "}
+            This is more than a calendar of events; it&apos;s a movement that
+            keeps the pulse of advertising alive and future-ready.
           </p>
 
           <p className="font-asgard mt-10 text-[18px] font-extrabold uppercase tracking-[0.08em] text-primary sm:text-[22px]">
@@ -99,10 +106,11 @@ export default function WhyAdClubMadras() {
               />
             </AnimatePresence>
 
-            <div className="absolute inset-0 bg-black/60" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            {/* Light bottom gradient only — no dark overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-            <div className="absolute inset-0 flex items-center px-6 sm:px-10 md:px-16">
+            {/* Text content */}
+            <div className="absolute inset-0 flex items-end px-6 pb-10 sm:px-10 sm:pb-14 md:px-16 md:pb-16">
               <div className="w-full max-w-2xl">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -120,7 +128,7 @@ export default function WhyAdClubMadras() {
                       {activeSlide.subtitle}
                     </p>
 
-                    <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-asgard text-[12px] font-bold uppercase tracking-[0.1em] text-white sm:text-[14px]">
+                    <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 font-asgard text-[12px] font-bold uppercase tracking-[0.1em] text-white sm:text-[14px]">
                       {activeSlide.items.map((item, index) => (
                         <div key={item} className="flex items-center gap-6">
                           {index !== 0 && (
@@ -135,7 +143,7 @@ export default function WhyAdClubMadras() {
                       whileHover={{ scale: 1.05 }}
                       type="button"
                       onClick={() => router.push(activeSlide.link)}
-                      className="group flex items-center w-fit mt-10"
+                      className="group flex items-center w-fit mt-8"
                     >
                       <span className="px-6 py-3 text-sm md:text-base bg-white hover:bg-primary text-black rounded-full font-bold font-asgard group-hover:bg-primary group-hover:text-black transition duration-300">
                         LEARN MORE
@@ -148,6 +156,24 @@ export default function WhyAdClubMadras() {
                 </AnimatePresence>
               </div>
             </div>
+
+            {/* Prev / Next Buttons */}
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-4 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-black hover:border-primary sm:h-12 sm:w-12"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/40 text-white backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-black hover:border-primary sm:h-12 sm:w-12"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
 
             {/* Dots */}
             <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3 md:bottom-12 md:right-12">

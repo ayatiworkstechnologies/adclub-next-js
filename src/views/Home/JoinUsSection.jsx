@@ -33,11 +33,17 @@ export default function JoinUsSection() {
 
             <div className="mt-8 space-y-4">
               <p className="text-phara !text-[13px] !leading-relaxed !text-white/70">
-                Because this is where Chennai’s advertising story is written every day. At Ad Club Madras, you don’t just watch the industry evolve, you’re part of the movement that drives it. From the iconic MADDYs that celebrate creativity, to PGDAM that shapes tomorrow’s leaders, we’ve set the stage, and the spotlight is on you.
+                Because this is where Chennai’s advertising story is written
+                every day. At Ad Club Madras, you don’t just watch the industry
+                evolve, you’re part of the movement that drives it. From the
+                iconic MADDYs that celebrate creativity, to PGDAM that shapes
+                tomorrow’s leaders, we’ve set the stage, and the spotlight is on
+                you.
               </p>
 
               <p className="text-phara !text-[13px] !leading-relaxed !text-white/70">
-                Join us to Inspire. Educate. Engage. And be the heartbeat of India’s advertising community.
+                Join us to Inspire. Educate. Engage. And be the heartbeat of
+                India’s advertising community.
               </p>
             </div>
 
@@ -75,7 +81,7 @@ export default function JoinUsSection() {
           {/* Right Image */}
           <div className="flex overflow-hidden rounded-[10px]">
             <img
-              src="/assets/membership-banner.jpg"
+              src="/assets/home-img-2.png"
               alt="Membership Ad Club Madras"
               className="h-full min-h-[300px] w-full object-cover transition-transform duration-700 hover:scale-105 md:min-h-full"
             />
@@ -84,40 +90,27 @@ export default function JoinUsSection() {
 
         {/* Bottom Highlight Heading */}
         <motion.div
-  initial={{ opacity: 0, y: 18 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-  viewport={{ once: true, amount: 0.3 }}
-  className="relative mx-auto mt-20 flex max-w-5xl justify-center text-center"
->
-  <div className="relative inline-block px-10 py-12">
-    <svg
-      className="absolute inset-x-0 top-1/2 h-[120%] w-full -translate-y-1/2 opacity-80"
-      viewBox="0 0 700 200"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-    >
-      <ellipse
-        cx="350"
-        cy="100"
-        rx="320"
-        ry="75"
-        stroke="currentColor"
-        strokeWidth="2"
-        className="text-primary"
-        strokeDasharray="1000"
-        style={{ filter: "drop-shadow(0 0 2px rgba(252, 192, 23, 0.5))" }}
-      />
-    </svg>
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.3 }}
+          className="relative mx-auto mt-20 flex max-w-5xl justify-center text-center"
+        >
+          <div className="relative inline-block px-10 py-12">
+            <img
+              src="/assets/Circle-yellow.svg"
+              alt=""
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+              style={{ filter: "drop-shadow(0 0 4px rgba(252, 192, 23, 0.4))" }}
+            />
 
-    <h3 className="font-asgard relative z-10 text-center text-[22px] font-bold uppercase tracking-[0.05em] text-white sm:text-[28px] md:text-[34px] leading-tight">
-      STAY AHEAD OF THE CURVE BY
-      <br />
-      PARTICIPATING IN OUR UPCOMING EVENTS
-    </h3>
-  </div>
-</motion.div>
+            <h3 className="font-asgard relative z-10 text-center text-[22px] font-bold uppercase tracking-[0.05em] text-white sm:text-[28px] md:text-[34px] leading-tight">
+              STAY AHEAD OF THE CURVE BY
+              <br />
+              PARTICIPATING IN OUR UPCOMING EVENTS
+            </h3>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

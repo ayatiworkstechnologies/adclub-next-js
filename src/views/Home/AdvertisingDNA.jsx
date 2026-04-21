@@ -17,7 +17,7 @@ export default function AdvertisingDNA() {
           {/* Left Image */}
           <div className="overflow-hidden rounded-[10px] bg-white/5">
             <img
-              src="/assets/maddys-2025.PNG"
+              src="/assets/home-img-1.png"
               alt="Advertising DNA"
               className="h-full min-h-[220px] w-full object-cover transition-transform duration-700 hover:scale-105"
             />
